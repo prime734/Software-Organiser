@@ -15,3 +15,23 @@
 .description{
     color: black;
 }
+
+.side-by-side{
+    display: flex;
+}
+
+.sign-up{
+    font-size: 20px;
+    text-align:center; 
+}
+.login{
+    font-size: 20px;
+    text-align:center; 
+}
+
+.sign-up:hover{
+    transform:  scale(1.15);
+}
+.login:hover{
+    transform:  scale(1.3);
+}
