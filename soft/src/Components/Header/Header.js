@@ -1,30 +1,42 @@
 import { Link } from "react-router-dom";
+import { FiFolder, FiHelpCircle } from "react-icons/fi";
+import { IoNotificationsOutline } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
 
-import './Header.css';
+import "./Header.css";
 
 function Header() {
-    return (
-        <div className="Header">
-            <header className="App-header">
-                <div className = "left-header">
-
-                    <h1 className="title-header">SOFT</h1>
-                </div>
-                <div className = "right-header">
-                    <div className = "links-header">
-                        <Link to="/page2" class = "link">Link 1</Link>
-                        <br />
-                        <Link to="/page2" class = "link">Link 2</Link>
-                        <br />
-                        <Link to="/page2" class="link">Link 3</Link>
-                        <br />
-                        <Link to="/page2" class="link">Link 4</Link>
-
-                    </div>
-                </div>
-            </header>
+  return (
+    <div className="Header">
+      <header className="App-header">
+        <div className="left-header">
+          <Link to="/page2" class="link">
+            <FiFolder />
+            &nbsp;Projects
+          </Link>
+          <br />
         </div>
-    );
+        <div className="right-header">
+          <div className="links-header">
+            <Link to="/page2" class="link">
+              <FiHelpCircle />
+              &nbsp;Help
+            </Link>
+            <br />
+            <Link to="/page2" class="link">
+              <IoNotificationsOutline />
+              &nbsp;Notifications
+            </Link>
+            <br />
+            <Link to="/page2" class="link">
+              <CgProfile />
+              &nbsp;Profile
+            </Link>
+          </div>
+        </div>
+      </header>
+    </div>
+  );
 }
 
 export default Header;
