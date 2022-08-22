@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import "./SplashScreen.css";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
+import kanban from "../../images/kanban.jpg";
+import productivity from "../../images/productivity.png";
+import project_management from "../../images/project_management.png";
+import user_story from "../../images/user_story.png";
 
 function SplashScreen() {
   let navigate = useNavigate();
@@ -18,15 +22,14 @@ function SplashScreen() {
         <Header />
       </div>
       <div class="body">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        <p>Project Management</p>
+        <img height={350} src={project_management} alt="project_management" />
+        <p>Measure your productivity</p>
+        <img height={350} src={productivity} alt="productivity" />
+        <p>Kanban board</p>
+        <img height={350} src={kanban} alt="kanban" />
+        <p>Add user stories</p>
+        <img height={350} src={user_story} alt="user_story" />
         <button class="okbutton" onClick={routeChange}>
           I AGREE
         </button>
