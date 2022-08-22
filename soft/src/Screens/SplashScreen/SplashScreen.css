@@ -1,3 +1,7 @@
 .body {
     text-align: center;
 }
+
+.new_project {
+    transform:  scale(1.3);
+}
