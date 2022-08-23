@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import SplashScreen from "./Screens/SplashScreen/SplashScreen";
+import Landing from "./Screens/Landing/Landing";
+
 import Page2 from "./Screens/Page2/Page2";
 
 function App() {
