@@ -27,7 +27,7 @@ function Login() {
     }, [isLogged]);
 
     const routeChange = () => {
-        let path = '/SplashScreen';
+        let path = '/';
         navigate(path);
     }
     const Setemail = event => {
