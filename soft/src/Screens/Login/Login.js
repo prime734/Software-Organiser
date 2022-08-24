@@ -16,10 +16,18 @@ function Login() {
     useEffect(() => {
         //changed path if user logged in succesfully
         console.log(isLogged);
+        if (!isLogged) {
+            // value is set to null because the user might try to login with the correct details later
+            setIsLogged(null);
+        }
+        else {
+            console.log("Path must be changed");
+            routeChange();
+        }
     }, [isLogged]);
 
     const routeChange = () => {
-        let path = '/';
+        let path = '/SplashScreen';
         navigate(path);
     }
     const Setemail = event => {
@@ -31,7 +39,7 @@ function Login() {
     const OnLogin = () => {
         //send a function to the database to check if log the user in
         
-            createUserWithEmailAndPassword(auth, email, password)
+            signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
@@ -43,12 +51,18 @@ function Login() {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     setIsLogged(false);
-                    
+                    if (errorCode === 'auth/invalid-email') {
+                        console.alert('That email address is invalid!');
+                    }
+                    else {
+                        console.alert(error)
+                    }    
             });  
     }
 
     const OnForgot = () => {
         // need to do something if the user forgot password
+ 
     }
 
     return (

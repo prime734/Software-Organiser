@@ -12,7 +12,7 @@ function Header() {
                 </div>
                 <div className = "right-header">
                     <div className = "links-header">
-                        <Link to="/page2" class = "link">Link 1</Link>
+                        <Link to="/Login" class = "link">Login</Link>
                         <br />
                         <Link to="/page2" class = "link">Link 2</Link>
                         <br />
