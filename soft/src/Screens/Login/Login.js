@@ -39,25 +39,24 @@ function Login() {
     const OnLogin = () => {
         //send a function to the database to check if log the user in
         
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    // Signed in 
-                    const user = userCredential.user;
-                    setIsLogged(true);
-                    
-                })
-                .catch((error) => {
-                    // failed to sign in
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    setIsLogged(false);
-                    if (errorCode === 'auth/invalid-email') {
-                        console.alert('That email address is invalid!');
-                    }
-                    else {
-                        console.alert(error)
-                    }    
-            });  
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+        const user = userCredential.user;
+        setIsLogged(true);                
+        })
+        .catch((error) => {
+            // failed to sign in
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setIsLogged(false);
+            if (errorCode === 'auth/invalid-email') {
+            console.alert('That email address is invalid!');
+            }
+            else {
+                console.alert(error)
+            }    
+        });  
     }
 
     const OnForgot = () => {
