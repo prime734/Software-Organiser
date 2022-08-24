@@ -1,13 +1,23 @@
 import { useNavigate } from 'react-router-dom';
+import { useState ,useEffect } from 'react';
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import './Login.css';
 import { loginmethod} from '../../firebase';
-
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 function Login() {
     let navigate = useNavigate();
-    let password , email;
+    let password , email ;
+    const [isLogged, setIsLogged] = useState(null);
+
+    const auth = getAuth();
+
+    useEffect(() => {
+        //changed path if user logged in succesfully
+        console.log(isLogged);
+    }, [isLogged]);
+
     const routeChange = () => {
         let path = '/';
         navigate(path);
@@ -20,9 +30,21 @@ function Login() {
     }
     const OnLogin = () => {
         //send a function to the database to check if log the user in
-        loginmethod(email, password);
-
         
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    setIsLogged(true);
+                    
+                })
+                .catch((error) => {
+                    // failed to sign in
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setIsLogged(false);
+                    
+            });  
     }
 
     const OnForgot = () => {
