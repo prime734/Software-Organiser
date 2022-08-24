@@ -14,13 +14,19 @@ function Login() {
     }
 
     return (
-        <div>
+        <div >
             <div class="header"><Header /></div>
-            <div className="centre"><br/>
-                <input className='login-input' placeholder="Email"/><br/>
-                <input className='login-input'  placeholder="Password" /><br />
-                <button className='forget-password-button'>Forgot Password?</button><br/>
-                <button class="Loginbutton">Login</button>
+            <div className='container'>
+                <div className='resize'>
+                   
+                    <div className="centre"><br />         
+                        <input className='login-input' placeholder="Email"/><br/>
+                        <input className='login-input'  placeholder="Password" /><br/>
+                        <button className='forget-password-button'>Forgot Password?</button><br/>
+                        <button class="Loginbutton">Login</button>
+                    </div>
+                </div>
+                <div className='background'></div>
             </div>
             
         </div>
