@@ -38,7 +38,7 @@ function SplashScreen() {
               is&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <p>unique — accomplish it all.&nbsp;&nbsp;&nbsp;&nbsp;</p>
-            <Link to="/page2" class="link">
+            <Link to="/Login" class="link">
               Login
             </Link>
             &nbsp;&nbsp;
