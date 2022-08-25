@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<SplashScreen />} />
-        <Route path="page2" element={<Page2 />} />
+        <Route path="page2" element={<Login />} />
         <Route path="Login" element={<Login />} />
       </Routes>
     </BrowserRouter>
