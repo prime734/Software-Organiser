@@ -15,7 +15,7 @@ import Folder from "@mui/icons-material/Folder";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
-import './Project.css'
+import "./Project.css";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -50,7 +50,7 @@ export default function AccountMenu() {
             >
               {" "}
               <Folder sx={{ color: "#c8e6c9" }} />
-              <Typography> Project </Typography>
+              &nbsp;<Typography> Project </Typography>
             </Card>
           </IconButton>
         </Tooltip>
