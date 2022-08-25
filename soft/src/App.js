@@ -4,6 +4,8 @@ import {
   Route,
 } from "react-router-dom";
 
+import Login from './Screens/Login/Login';
+import MyProjects from './Components/Projects/MyProjects';
 import SplashScreen from './Screens/SplashScreen/SplashScreen';
 import Page2 from "./Screens/Page2/Page2";
 
