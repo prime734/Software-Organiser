@@ -49,7 +49,7 @@ export default function AccountMenu() {
               }}
             >
               {" "}
-              <Folder sx={{ color: "#c8e6c9" }} />
+              <Folder sx={{ color: "#FF7F50" }} />
               &nbsp;<Typography> Project </Typography>
             </Card>
           </IconButton>
