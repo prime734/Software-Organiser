@@ -42,7 +42,7 @@ function SplashScreen() {
               Login
             </Link>
             &nbsp;&nbsp;
-            <button class="sign-up" onClick={routeChange}>
+            <button class="okbutton" onClick={routeChange}>
               Sign up now
             </button>
           </div>
