@@ -32,7 +32,7 @@ header {
 }
 
 .link:hover {
-    color: #8E0808;
+    color: #cfafa3;
     /* text-decoration: underline; */
     transform:  scale(1.3);
 }
