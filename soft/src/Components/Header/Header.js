@@ -14,7 +14,7 @@ function Header() {
     <div className="Header">
       <header className="App-header">
         <div className="left-header">
-          <img src={Lion} width="50" />
+          <img src={Lion} width="40" />
           <p class="software">&nbsp;Lion</p>
           <Project />
         </div>
