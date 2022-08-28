@@ -27,4 +27,4 @@ for organizing large software projects, in the vein of Taiga or Trello.
 * Tshepiso Mahoko
 
 
-### To find out more, please visit the ![Software Organiser Wiki](https://github.com/Software-Designers-69/Software-Organizer/wiki)
+### To find out more, please visit the [Software Organiser Wiki](https://github.com/Software-Designers-69/Software-Organizer/wiki)
