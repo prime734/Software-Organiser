@@ -1,8 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
-import SplashScreen from "./Screens/SplashScreen/SplashScreen";
-import Landing from "./Screens/Landing/Landing";
-
+import Login from './Screens/Login/Login';
+import MyProjects from './Components/Projects/MyProjects';
+import SplashScreen from './Screens/SplashScreen/SplashScreen';
 import Page2 from "./Screens/Page2/Page2";
 
 function App() {
@@ -11,6 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<SplashScreen />} />
         <Route path="page2" element={<Page2 />} />
+        <Route path="Login" element={<Login />} />
+        <Route path="myprojects" element={<MyProjects />} />
+
       </Routes>
     </BrowserRouter>
   );

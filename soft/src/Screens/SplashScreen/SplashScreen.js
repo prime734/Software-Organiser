@@ -8,9 +8,13 @@ import productivity from "../../images/productivity.png";
 import project_management from "../../images/project_management.png";
 import user_story from "../../images/user_story.png";
 import hero from "../../images/hero.png";
-import working from "../../images/working.mp4";
-import gears from "../../images/gears.mp4";
-import taskman from "../../images/taskman.mp4";
+import working from "../../images/working.json";
+import gears from "../../images/gears.json";
+import taskman from "../../images/taskman.json";
+
+import react from "react";
+import Lottie from "lottie-react";
+import Lion from "../../images/Lion.json";
 
 function SplashScreen() {
   let navigate = useNavigate();
@@ -38,23 +42,21 @@ function SplashScreen() {
               is&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <p>unique — accomplish it all.&nbsp;&nbsp;&nbsp;&nbsp;</p>
-            <Link to="/page2" class="link">
+            <Link to="/Login" class="link">
               Login
             </Link>
             &nbsp;&nbsp;
-            <button class="sign-up" onClick={routeChange}>
+            <button class="okbutton" onClick={routeChange}>
               Sign up now
             </button>
           </div>
           <div>
             <p>&nbsp;</p>
-            <video
-              src={working}
-              width="600"
-              height="420"
+
+            <Lottie
+              animationData={working}
               loop={true}
-              autoPlay={true}
-              muted
+              style={{ height: 400 }}
             />
           </div>
         </div>
@@ -75,14 +77,7 @@ function SplashScreen() {
             <img height={320} src={productivity} alt="productivity" />
           </div>
           <div>
-            <video
-              src={gears}
-              width="500"
-              height="320"
-              loop={true}
-              autoPlay={true}
-              muted
-            />
+            <Lottie animationData={gears} loop={true} style={{ height: 250 }} />
           </div>
         </div>
 
@@ -96,13 +91,10 @@ function SplashScreen() {
 
         <div class="side-by-side">
           <div>
-            <video
-              src={taskman}
-              width="250"
-              height="280"
+            <Lottie
+              animationData={taskman}
               loop={true}
-              autoPlay={true}
-              muted
+              style={{ height: 250 }}
             />
           </div>
           <div>

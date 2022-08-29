@@ -5,16 +5,18 @@ import { CgProfile } from "react-icons/cg";
 
 import "./Header.css";
 
+import Profile from "../Profile/Profile";
+import Project from "../Projects/Project";
+import Lion from "../../images/LION.png";
+
 function Header() {
   return (
     <div className="Header">
       <header className="App-header">
         <div className="left-header">
-          <Link to="/page2" class="link">
-            <FiFolder />
-            &nbsp;Projects
-          </Link>
-          <br />
+          <img src={Lion} width="40" />
+          <p class="software">&nbsp;Lion</p>
+          <Project />
         </div>
         <div className="right-header">
           <div className="links-header">
@@ -22,16 +24,14 @@ function Header() {
               <FiHelpCircle />
               &nbsp;Help
             </Link>
+
             <br />
             <Link to="/page2" class="link">
               <IoNotificationsOutline />
               &nbsp;Notifications
             </Link>
             <br />
-            <Link to="/page2" class="link">
-              <CgProfile />
-              &nbsp;Profile
-            </Link>
+            <Profile />
           </div>
         </div>
       </header>
