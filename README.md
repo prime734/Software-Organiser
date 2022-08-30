@@ -6,6 +6,8 @@
 
 [![Running Code Coverage](https://github.com/Software-Designers-69/Software-Organizer/actions/workflows/codecov.yml/badge.svg?branch=main)](https://github.com/Software-Designers-69/Software-Organizer/actions/workflows/codecov.yml)
 
+[![codecov](https://codecov.io/gh/Software-Designers-69/Software-Organizer/branch/main/graph/badge.svg?token=PN62VNAJH3)](https://codecov.io/gh/Software-Designers-69/Software-Organizer)
+
 Welcome to **Wits Software Organiser** where we will be designing and implementing the Kanban-based platform
 for organizing large software projects, in the vein of Taiga or Trello.
 
