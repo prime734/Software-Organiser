@@ -1,5 +1,5 @@
 # Software-Organizer
-
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/Software-Designers-69/Software-Organizer/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/Software-Designers-69/Software-Organizer/tree/main)
 ## Introduction
 
 Welcome to **Wits Software Organiser** where we will be designing and implementing the Kanban-based platform
