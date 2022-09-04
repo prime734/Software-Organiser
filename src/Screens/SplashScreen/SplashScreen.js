@@ -1,7 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 
 import "./SplashScreen.css";
-import Header from "../../Components/Header/Header";
+import HeaderB from "../../Components/HeaderB/HeaderB";
 import Footer from "../../Components/Footer/Footer";
 import kanban from "../../images/kanban.jpg";
 import productivity from "../../images/productivity.png";
@@ -20,14 +20,14 @@ function SplashScreen() {
   let navigate = useNavigate();
 
   const routeChange = () => {
-    let path = "/page2";
+    let path = "/signup";
     navigate(path);
   };
 
   return (
     <div>
       <div class="header">
-        <Header />
+        <HeaderB />
       </div>
       <div class="body">
         <div class="side-by-side">

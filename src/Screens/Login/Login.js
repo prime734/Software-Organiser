@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useState ,useEffect } from 'react';
-import Header from '../../Components/Header/Header';
+import HeaderB from '../../Components/HeaderB/HeaderB';
 import Footer from '../../Components/Footer/Footer';
 import './Login.css';
-import { loginmethod} from '../../firebase';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 function Login() {
@@ -66,19 +65,23 @@ function Login() {
 
     return (
         <div >
-            <div class="header"><Header /></div>
+            <div class="header">
+                <HeaderB />
+            </div>
             <div className='container'>
                 <div className='resize'>
                     <div className="centre"><br />         
-                        <input className='login-input' placeholder="Email" onChange={Setemail}/><br/>      
-                        <input className='login-input'  placeholder="Password" onChange={Setpassword}/> <br/>
+                        <input className='login-input' type="email" placeholder="Email" onChange={Setemail}/><br/>      
+                        <input className='login-input' type="password" placeholder="Password" onChange={Setpassword}/> <br/>
                         <button className='forget-password-button'>Forgot Password?</button><br/>
                         <button class="Loginbutton" onClick={OnLogin}>Login</button>
                     </div>
                 </div>
                 <div className='background'></div>
             </div>
-        
+            <div class = "footer">
+                <Footer />
+            </div>
         </div>
     );
 }
