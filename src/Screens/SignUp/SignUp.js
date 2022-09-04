@@ -12,26 +12,30 @@ import project_management from "../../images/project_management.png";
 
 function SignUp() {
     let navigate = useNavigate();
-    let name, password, email, surname;
+    const [name,setName] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [surname, setSurname] = useState('');
+
     const [isLogged, setIsLogged] = useState(null);
 
 
 
     const routeChange = () => {
-        let path = '/Login';
-        navigate(path);
+        let path = '/landing';
+        navigate(path, { state: {email: email}});
     }
     const Setname = event => {
-        name = event.target.value;
+        setName(event.target.value);
     }
     const Setemail = event => {
-        email = event.target.value;
+        setEmail(event.target.value);
     }
     const Setpassword = event => {
-        password = event.target.value;
+        setPassword(event.target.value);
     }
     const SetSurname = event => {
-        surname = event.target.value;
+        setSurname(event.target.value);
     }
 
     const auth = getAuth();
