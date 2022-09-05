@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import HeaderB from '../../Components/HeaderB/HeaderB';
 import Footer from '../../Components/Footer/Footer';
 import './Login.css';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { EmailContext } from '../../context';
 
 function Login() {
     let navigate = useNavigate();
@@ -11,6 +12,7 @@ function Login() {
     const auth = getAuth();
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const { userEmail, setUserEmail } = useContext(EmailContext);
 
     useEffect(() => {
         //changed path if user logged in succesfully
@@ -43,6 +45,7 @@ function Login() {
                 // Signed in 
                 const user = userCredential.user;
                 setIsLogged(true);
+                setUserEmail(email);
             })
             .catch((error) => {
                 // failed to sign in

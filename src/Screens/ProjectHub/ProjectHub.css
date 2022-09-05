@@ -1,0 +1,12 @@
+.delete-btn{
+    background-color: transparent;
+    border: 1px solid red;
+    border-width: 1px 1px 1px 1px;
+    height: 30px;
+    width: 180px;
+    margin-top: 20px;
+    border-radius: 30px;
+    font-family: 'Trebuchet MS';
+    font-size: 18px;
+    color: red;
+}

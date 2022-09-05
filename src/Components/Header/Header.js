@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiFolder, FiHelpCircle } from "react-icons/fi";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
@@ -6,15 +6,20 @@ import { CgProfile } from "react-icons/cg";
 import "./Header.css";
 
 import Profile from "../Profile/Profile";
-import Project from "../Projects/Project";
+import Project from "../Projects/Project/Project";
 import Lion from "../../images/LION.png";
 
 function Header() {
+  let navigate = useNavigate();
+
+  const routeChange = () => {
+    navigate(-1);
+  };
   return (
     <div className="Header">
       <header className="App-header">
         <div className="left-header">
-          <img src={Lion} width="40" />
+          <img src={Lion} width="40" onClick={routeChange}/>
           <p class="software">&nbsp;Lion</p>
           <Project />
         </div>

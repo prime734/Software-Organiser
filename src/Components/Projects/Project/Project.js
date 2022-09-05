@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -9,16 +10,23 @@ import IconButton from "@mui/material/IconButton";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
+import Button from "@mui/material/Button";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Folder from "@mui/icons-material/Folder";
-import AddBoxIcon from "@mui/icons-material/AddBox";
+import AddSharpIcon from "@mui/icons-material/AddSharp";
 import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
+import { db } from "../../../firebase";
+import { doc, getDoc } from "firebase/firestore";
 import "./Project.css";
 
-export default function AccountMenu() {
+export default function Project() {
+  const [project, setProject] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  window.addEventListener("load", () => {
+    fun();
+  });
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -26,6 +34,19 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const fun = async () => {
+    const docRef = doc(db, "Projects", "sFCPzbCBQpVCHwOkY3MB");
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      setProject([...project, docSnap.data()]);
+    }
+  };
+  useEffect(() => {
+    fun();
+  }, []);
+
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -78,7 +99,7 @@ export default function AccountMenu() {
               display: "block",
               position: "absolute",
               top: 0,
-              right: 170,
+              right: 30,
               width: 10,
               height: 10,
               bgcolor: "background.paper",
@@ -91,24 +112,22 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar variant="square">P</Avatar>
-          Project 1
-        </MenuItem>
-        <MenuItem>
-          <Avatar variant="square">P</Avatar>
-          Project 2
+          <Avatar variant="square">
+            {project.length != 0 ? project[0].ProjectName[0] : "U"}
+          </Avatar>
+          {project.length != 0 ? project[0].ProjectName : "Unavailabe"}
         </MenuItem>
         <Divider />
         <MenuItem>
-          <Link to="/myprojects" class="link">
-            Show all projects
+          <Link to="/myprojects" class="show-all-projects">
+            <Typography>Show all projects</Typography>
           </Link>
         </MenuItem>
         <MenuItem>
-          <ListItemIcon>
-            <AddBoxIcon fontSize="large" />
-          </ListItemIcon>
-          Create new project
+          <Button sx={{ bgcolor: "#FF6666" }} href="createprojects" variant="contained">
+            <AddSharpIcon fontSize="small" />
+            Create new project
+          </Button>
         </MenuItem>
       </Menu>
     </React.Fragment>
