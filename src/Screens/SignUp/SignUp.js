@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import HeaderB from '../../Components/HeaderB/HeaderB';
 import Footer from '../../Components/Footer/Footer';
 import '../Login/Login.css';
@@ -9,6 +9,8 @@ import { db } from '../../firebase';
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import emailjs from 'emailjs-com';          // library used to send users emails
 import project_management from "../../images/project_management.png";
+import { EmailContext } from '../../context';
+
 
 function SignUp() {
     let navigate = useNavigate();
@@ -16,6 +18,7 @@ function SignUp() {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [surname, setSurname] = useState('');
+    const { userEmail, setUserEmail } = useContext(EmailContext);
 
     const [isLogged, setIsLogged] = useState(null);
 
@@ -47,6 +50,7 @@ function SignUp() {
                 const user = userCredential.user;
                 sendemail();                               // notifies the user after account has been created
                 addDetails();                                //update table
+                setUserEmail(email);
                 routeChange();                         // change to route to login after successful signup
             })
             .catch((error) => {

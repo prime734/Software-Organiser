@@ -89,7 +89,7 @@ function Landing() {
         </div>
         <h4>My teams</h4>
         <div className = 'div-cont'>
-          <div className='team-div' onClick={routeChange}>
+          <div className='team-div'>
             <h6><span class="material-symbols-outlined">
               add_circle
             </span></h6>
