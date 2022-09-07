@@ -12,24 +12,24 @@ import Footer from "../../Components/Footer/Footer";
 import NewProject from "../../images/new_project.svg";
 
 function Landing() {
-  const [projects, setProjects] = useState([]);
-  const projectRef = collection(db, 'Projects');
-  const [teams, setTeams] = useState([]);
-  const teamRef = collection(db, 'Teams');
+  const [projects, setProjects] = useState([]);     //array to store user's projects'
+  const projectRef = collection(db, 'Projects');    //collection reference to all projects
+  const [teams, setTeams] = useState([]);         //array to store user's teams'
+  const teamRef = collection(db, 'Teams');      //collection reference to all teams
   let navigate = useNavigate();
-  const { userEmail, setUserEmail } = useContext(EmailContext);
+  const { userEmail, setUserEmail } = useContext(EmailContext);       //email address of user logged in
 
 
 
 
   /*---------------------------------------------------------------- */
 
-  const routeChange = () => {
+  const routeChange = () => {     //router function to navigate site
     let path = "/scrum";
     navigate(path);
   };
 
-  function editHub(project){
+  function editHub(project){    //router function to view detials on single project
     let path = "/projecthub";
     navigate(path, { state: { 
       ID: project.id,
@@ -41,13 +41,13 @@ function Landing() {
   };
 
 
-  useEffect(() => {
-    const getProjects = async () => {
+  useEffect(() => {     
+    const getProjects = async () => {       //fetching all projects from database
       const data = await getDocs(projectRef);
       setProjects(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
 
-    const getTeams = async () => {
+    const getTeams = async () => {      //fetching all teams from database
       const data = await getDocs(teamRef);
       setTeams(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
