@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import HeaderB from "../../Components/HeaderB/HeaderB";
 import './Contact.css'
+import Footer from "../../Components/Footer/Footer";
 
 export default function Contact() {
   const form = useRef();
@@ -61,6 +62,11 @@ export default function Contact() {
         <br />
         <input type="submit" value="Submit" className = "subbut"/>
       </form>
+      </div>
+      <br/>
+
+      <div class="footer">
+        <Footer />
       </div>
       
     </div>
