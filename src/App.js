@@ -15,6 +15,7 @@ import Landing from "./Screens/Landing/Landing";
 import ProfileSettings from './Components/Profile/ProfileSettings';
 import Scrum from './Components/Projects/CreateProject/Scrum/Scrum';
 import ProjectHub from './Screens/ProjectHub/ProjectHub'
+import Contact from './Screens/Contact/Contact'
 
 function App() {
   const [userEmail, setUserEmail] = useState('');
@@ -32,6 +33,8 @@ function App() {
           <Route path="scrum" element={<Scrum />} />
           <Route path="profilesettings" element={<ProfileSettings />} />
           <Route path="projecthub" element={<ProjectHub />} />
+          <Route path="/contact" element={<Contact />} />
+
 
         </Routes>
       </BrowserRouter>
