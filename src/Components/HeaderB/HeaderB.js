@@ -18,9 +18,19 @@ function HeaderB() {
                 <div className="left-header">
                     <img src={Lion} width="40" onClick={routeChange}/>
                     <p class="software">&nbsp;Lion</p>
+
                 </div>
                 <div className="right-header">
                     <div className="links-header">
+                        <Link to="/" class="link">
+                                &nbsp;Home
+                        </Link>
+                        <br />
+
+                        <Link to="/contact" class="link">
+                            &nbsp;Contact
+                        </Link>
+
                         <Link to="/" class="link">
                             <FiHelpCircle />
                             &nbsp;Help
@@ -32,6 +42,7 @@ function HeaderB() {
                             &nbsp;Notifications
                         </Link>
                         <br />
+
                     </div>
                 </div>
             </header>
