@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FiHelpCircle } from "react-icons/fi";
+import { FiHelpCircle, FiHome } from "react-icons/fi";
 import { IoNotificationsOutline } from "react-icons/io5";
+import {AiOutlineContacts} from "react-icons/ai"
 
 import "./HeaderB.css";
 import Lion from "../../images/LION.png";
@@ -18,9 +19,21 @@ function HeaderB() {
                 <div className="left-header">
                     <img src={Lion} width="40" onClick={routeChange}/>
                     <p class="software">&nbsp;Lion</p>
+
                 </div>
                 <div className="right-header">
                     <div className="links-header">
+                        <Link to="/" class="link">
+                            <FiHome/>
+                            &nbsp;Home
+                        </Link>
+                        <br />
+
+                        <Link to="/contact" class="link">
+                            <AiOutlineContacts/>
+                            &nbsp;Contact
+                        </Link>
+
                         <Link to="/" class="link">
                             <FiHelpCircle />
                             &nbsp;Help
@@ -32,6 +45,7 @@ function HeaderB() {
                             &nbsp;Notifications
                         </Link>
                         <br />
+
                     </div>
                 </div>
             </header>

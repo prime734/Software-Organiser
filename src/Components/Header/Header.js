@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FiFolder, FiHelpCircle } from "react-icons/fi";
+import { FiFolder, FiHelpCircle, FiHome } from "react-icons/fi";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
+import {AiOutlineContacts} from "react-icons/ai"
 
 import "./Header.css";
 
@@ -25,13 +26,24 @@ function Header() {
         </div>
         <div className="right-header">
           <div className="links-header">
-            <Link to="/page2" class="link">
+
+            <Link to="/landing" class="link">
+              <FiHome/>
+              &nbsp;Home
+            </Link>
+
+            <Link to="/contactb" class="link">
+              <AiOutlineContacts/>
+              &nbsp;Contact
+            </Link>
+
+            <Link to="/landing" class="link">
               <FiHelpCircle />
               &nbsp;Help
             </Link>
 
             <br />
-            <Link to="/page2" class="link">
+            <Link to="/landing" class="link">
               <IoNotificationsOutline />
               &nbsp;Notifications
             </Link>
