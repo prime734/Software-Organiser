@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FiHelpCircle } from "react-icons/fi";
+import { FiHelpCircle, FiHome } from "react-icons/fi";
 import { IoNotificationsOutline } from "react-icons/io5";
+import {AiOutlineContacts} from "react-icons/ai"
 
 import "./HeaderB.css";
 import Lion from "../../images/LION.png";
@@ -23,11 +24,13 @@ function HeaderB() {
                 <div className="right-header">
                     <div className="links-header">
                         <Link to="/" class="link">
-                                &nbsp;Home
+                            <FiHome/>
+                            &nbsp;Home
                         </Link>
                         <br />
 
                         <Link to="/contact" class="link">
+                            <AiOutlineContacts/>
                             &nbsp;Contact
                         </Link>
 
