@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -21,188 +21,252 @@ import TextField from "@mui/material/TextField";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import Header from "../Header/Header";
+import { getAuth, sendPasswordResetEmail, updatePassword } from "firebase/auth";
+import { EmailContext } from "../../context";
 import "./ProfileSettings.css";
+import { db } from "../../firebase";
+import { doc, getDoc, getDocs, collection, setDoc } from "firebase/firestore";
 
 const drawerWidth = 240;
 
-function ResponsiveDrawer(props) {
-    const { window } = props;
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+function ProfileSettings(props) {
+  const { window } = props;
+  const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-    };
-    const [showUS, setShowUS] = useState(true);
-    const [showCP, setShowCP] = useState(false);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+  const [showUS, setShowUS] = useState(true);
+  const [showCP, setShowCP] = useState(false);
 
-    const drawer = (
-        <div>
+  const drawer = (
+    <div>
+      <Toolbar />
+      <Divider />
+      <List>
+        <ListItem
+          onClick={() => {
+            setShowUS((prev) => (showUS ? prev : !prev));
+            setShowCP(false);
+          }}
+          disablePadding
+        >
+          <ListItemButton>
+            <ListItemIcon>
+              <ManageAccountsIcon />
+            </ListItemIcon>
+            <ListItemText primary="User settings" />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem
+          onClick={() => {
+            setShowCP((prev) => (showCP ? prev : !prev));
+            setShowUS(false);
+          }}
+          disablePadding
+        >
+          <ListItemButton>
+            <ListItemIcon>
+              <LockOpenIcon />
+            </ListItemIcon>
+            <ListItemText primary="Change password" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </div>
+  );
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
+  const auth = getAuth();
+
+  const user = auth.currentUser;
+  const newPassword = "prime.1";
+
+  const { userEmail, setUserEmail } = useContext(EmailContext);
+  const [id, setID] = useState([]);
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [EMAIL, setEMAIL] = useState("");
+
+  const resetPass = () => {
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, EMAIL)
+      .then(() => {
+        // Password reset email sent!
+        alert("Link was sent.");
+        // ..
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  };
+
+  const dt = [];
+  const updateUS = async () => {
+    const querySnapshot = await getDocs(collection(db, "Users"));
+    querySnapshot.forEach((doc) => {
+      if (doc.data().Email === userEmail) {
+        dt.push(doc.id);
+      }
+    });
+    setID(dt);
+  };
+  const updateFields = async () => {
+    await setDoc(
+      doc(db, "Users", id[0]),
+      {
+        Name: name,
+        Surname: surname,
+      },
+      { merge: true }
+    );
+    alert("Field(s) updated.")
+  };
+
+  useEffect(() => {
+    updateUS();
+  }, []);
+
+  return (
+    <div>
+      <Header />
+      <Box sx={{ display: "flex" }}>
+        <Box
+          component="nav"
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          aria-label="mailbox folders"
+        >
+          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          <Drawer
+            container={container}
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: "block", sm: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
+            }}
+          >
+            {drawer}
+          </Drawer>
+          <Drawer
+            variant="permanent"
+            sx={{
+              display: { xs: "none", sm: "grid" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
+            }}
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Box>
+        {showUS && (
+          <Box
+            component="main"
+            sx={{
+              display: "grid",
+              rowGap: 3,
+              p: 6,
+              width: { sm: `calc(100% - ${drawerWidth}px)` },
+            }}
+          >
             <Toolbar />
-            <Divider />
-            <List>
-                <ListItem
-                    onClick={() => {
-                        setShowUS((prev) => (showUS ? prev : !prev));
-                        setShowCP(false);
-                    }}
-                    disablePadding
-                >
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <ManageAccountsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="User settings" />
-                    </ListItemButton>
-                </ListItem>
+            <Typography sx={{ textAlign: "start" }} variant="h5">
+              {" "}
+              User settings
+            </Typography>
 
-                <ListItem
-                    onClick={() => {
-                        setShowCP((prev) => (showCP ? prev : !prev));
-                        setShowUS(false);
-                    }}
-                    disablePadding
-                >
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <LockOpenIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Change password" />
-                    </ListItemButton>
-                </ListItem>
-            </List>
-        </div>
-    );
+            <div>
+              <Typography>Name</Typography>
+              <TextField
+                size="small"
+                placeholder="New name"
+                onChange={(event) => {
+                  setName(event.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <Typography>Surname</Typography>
+              <TextField
+                size="small"
+                placeholder="New surname"
+                onChange={(event) => {
+                  setSurname(event.target.value);
+                }}
+              />
+            </div>
 
-    const container =
-        window !== undefined ? () => window().document.body : undefined;
+            <Button
+              sx={{ width: 100, borderRadius: 4, bgcolor: "#FF6666" }}
+              variant="contained"
+              onClick={updateFields}
+            >
+              update
+            </Button>
+          </Box>
+        )}
 
-    return (
-        <div>
-            <Header />
-            <Box sx={{ display: "flex" }}>
-                <Box
-                    component="nav"
-                    sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-                    aria-label="mailbox folders"
-                >
-                    {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-                    <Drawer
-                        container={container}
-                        variant="temporary"
-                        open={mobileOpen}
-                        onClose={handleDrawerToggle}
-                        ModalProps={{
-                            keepMounted: true, // Better open performance on mobile.
-                        }}
-                        sx={{
-                            display: { xs: "block", sm: "none" },
-                            "& .MuiDrawer-paper": {
-                                boxSizing: "border-box",
-                                width: drawerWidth,
-                            },
-                        }}
-                    >
-                        {drawer}
-                    </Drawer>
-                    <Drawer
-                        variant="permanent"
-                        sx={{
-                            display: { xs: "none", sm: "grid" },
-                            "& .MuiDrawer-paper": {
-                                boxSizing: "border-box",
-                                width: drawerWidth,
-                            },
-                        }}
-                        open
-                    >
-                        {drawer}
-                    </Drawer>
-                </Box>
-                {showUS && (
-                    <Box
-                        component="main"
-                        sx={{
-                            display: "grid",
-                            rowGap: 3,
-                            p: 6,
-                            width: { sm: `calc(100% - ${drawerWidth}px)` },
-                        }}
-                    >
-                        <Toolbar />
-                        <Typography sx={{ textAlign: "start" }} variant="h5">
-                            {" "}
-                            User settings
-                        </Typography>
-                        <div>
-                            <Typography>Username</Typography>
-                            <TextField size="small" defaultValue="My username" />
-                        </div>
-                        <div>
-                            <Typography>email</Typography>
-                            <TextField size="small" defaultValue="My email address" />
-                        </div>
-                        <div>
-                            <Typography>Full name</Typography>
-                            <TextField size="small" placeholder="Full name" />
-                        </div>
-                        <Button sx={{ width: 100, borderRadius: 4, bgcolor: "#FF6666" }} variant='contained'>update</Button>
-
-                    </Box>
-                )}
-
-                {showCP && (
-                    <Box
-                        component="main"
-                        sx={{
-                            display: "grid",
-                            rowGap: 3,
-                            p: 6,
-                            width: { sm: `calc(100% - ${drawerWidth}px)` },
-                        }}
-                    >
-                        <Toolbar />
-                        <Typography sx={{ textAlign: "start" }} variant="h5">
-                            {" "}
-                            Change password
-                        </Typography>
-                        <div>
-                            <Typography>Current password</Typography>
-                            <TextField
-                                size="small"
-                                type="password"
-                                placeholder="Type in current password"
-                            />
-                        </div>
-                        <div>
-                            <Typography>New password</Typography>
-                            <TextField
-                                size="small"
-                                type="password"
-                                placeholder="Type in new password"
-                            />
-                        </div>
-                        <div>
-                            <Typography>Confirm new password</Typography>
-                            <TextField
-                                size="small"
-                                type="password"
-                                placeholder="Confirm new password"
-                            />
-                        </div>
-                        <Button sx={{ width: 100, borderRadius: 4, bgcolor: "#FF6666" }} variant='contained'>update</Button>
-                    </Box>
-                )}
-            </Box>
-        </div>
-    );
+        {showCP && (
+          <Box
+            component="main"
+            sx={{
+              display: "grid",
+              rowGap: 3,
+              p: 6,
+              width: { sm: `calc(100% - ${drawerWidth}px)` },
+            }}
+          >
+            <Toolbar />
+            <Typography sx={{ textAlign: "start" }} variant="h5">
+              {" "}
+              Change password
+            </Typography>
+            <div>
+              <Typography>Email</Typography>
+              <TextField
+                size="small"
+                type="text"
+                placeholder="Enter email address"
+                onChange={(event) => {
+                  setEMAIL(event.target.value);
+                }}
+              />
+            </div>
+            <Button
+              sx={{ width: 200, borderRadius: 4, bgcolor: "#FF6666" }}
+              variant="contained"
+              onClick={resetPass}
+            >
+              Send reset link
+            </Button>
+          </Box>
+        )}
+      </Box>
+    </div>
+  );
 }
 
-ResponsiveDrawer.propTypes = {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
-    window: PropTypes.func,
+ProfileSettings.propTypes = {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
 };
 
-export default ResponsiveDrawer;
+export default ProfileSettings;
