@@ -3,7 +3,6 @@ import { useState, useEffect, useContext } from 'react';
 import HeaderB from '../../Components/HeaderB/HeaderB';
 import Footer from '../../Components/Footer/Footer';
 import '../Login/Login.css';
-import './SignUp.css';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { db } from '../../firebase';
 import { collection, getDocs, addDoc } from "firebase/firestore";
@@ -93,10 +92,16 @@ function SignUp() {
                     <div className="centre"><br />
                         <input className='login-input' placeholder="Name" onChange={Setname} /><br />
                         <input className='login-input' placeholder="Surname" onChange={SetSurname} /><br />
-                        <input className='login-input' type="email" placeholder="Email" onChange={Setemail} /><br />
-                        <input className='login-input' type="password" placeholder="Password" onChange={Setpassword} /> <br />
+                        <input className='login-input'  placeholder="Email" onChange={Setemail} /><br />
+                        <input className='login-input'  placeholder="Password" onChange={Setpassword} /> <br />
                         <button class="Loginbutton" onClick={OnSignup}>Sign-Up</button><br />
                         <br />
+                    </div>
+                </div>
+                <div>
+                    <p class="txt-login">Start Your first Project!</p>
+                    <div className='background'>
+                        <img width={512} src={project_management} />
                     </div>
                 </div>
             </div>
