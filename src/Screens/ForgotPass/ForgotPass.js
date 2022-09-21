@@ -53,12 +53,7 @@ function ForgotPass() {
                         <br />
                     </div>
                 </div>
-              <div>
-                    <p class="txt-login">Optimize Flexibility and Efficiency</p>
-                    <div className='background'>
-                        <img width={512} src={project_management} />
-                    </div>
-            </div>
+                <div className='background'></div>
             </div>
             <div class = "Footer">
                 <Footer />
