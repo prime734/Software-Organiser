@@ -1,0 +1,29 @@
+.addbtn {
+    background-color: coral;
+    border: 0px;
+    border-width: 1px 1px 1px 1px;
+    height: 30px;
+    width: 180px;
+    margin-top: 20px;
+    border-radius: 30px;
+    font-family: 'Trebuchet MS';
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.edtinput{
+    width:50%;
+    height:100px;
+    border: 1px solid #B38B59;
+    border-radius: 3px;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.edtselect {
+    align-self: flex-end;
+    margin-right: 25%;
+    margin-top: 15px;
+    font-size: 18px;
+}
+

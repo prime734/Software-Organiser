@@ -17,6 +17,7 @@ import Scrum from './Components/Projects/CreateProject/Scrum/Scrum';
 import ProjectHub from './Screens/ProjectHub/ProjectHub';
 import Contact from './Screens/Contact/Contact';
 import ContactB from "./Screens/ContactB/ContactB";
+import Add from "./Screens/Add/Add";
 
 function App() {
   const [userEmail, setUserEmail] = useState('');
@@ -36,6 +37,8 @@ function App() {
           <Route path="projecthub" element={<ProjectHub />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/contactb" element={<ContactB />} />
+          <Route path="/add" element={<Add />} />
+
 
 
 

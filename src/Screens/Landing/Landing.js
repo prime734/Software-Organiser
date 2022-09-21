@@ -36,7 +36,8 @@ function Landing() {
       ProjectName: project.ProjectName,
       ProjectOwner: project.ProjectOwner,
       ProjectMembers: project.ProjectMembers,
-      ProjectDesc: project.ProjectDesc
+      ProjectDesc: project.ProjectDesc,
+      UserStories: project.UserStories.reverse()
     } });
   };
 
