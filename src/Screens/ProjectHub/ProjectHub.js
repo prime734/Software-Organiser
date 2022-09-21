@@ -1,23 +1,24 @@
-import { React, useState, useEffect, useContext } from 'react';
+import { React, useState, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { db } from '../../firebase';
+import { db } from "../../firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 import { EmailContext } from "../../context";
 
 import Lion from "../../images/Lion-white.png";
-import './ProjectHub.css';
+import "./ProjectHub.css";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 
 function ProjectHub() {
   const { state } = useLocation();
-  const { 
+  const {
     ID,
     ProjectName,
     ProjectOwner,
     ProjectMembers,
     ProjectDesc,
-    UserStories
+    UserStories,
+    ProjectWiki,
   } = state;
   let navigate = useNavigate();
   const { userEmail, setUserEmail } = useContext(EmailContext);
@@ -26,26 +27,41 @@ function ProjectHub() {
     navigate(-1);
   };
 
-  const deleteProject = async () => {
-    await deleteDoc(doc(db, 'Projects', ID));
-    goBack();
+  function editWiki(ProjectWiki) {
+    //router function to view detials on single project
+    let path = "/Wiki";
+    navigate(path, {
+      state: {
+        ProjectWiki: ProjectWiki,
+        ID: ID,
+      },
+    });
   }
 
+  const deleteProject = async () => {
+    await deleteDoc(doc(db, "Projects", ID));
+    goBack();
+  };
+
   const tryDelete = () => {
-    let isExecuted = window.confirm('Are you sure you want to delete this project?');
+    let isExecuted = window.confirm(
+      "Are you sure you want to delete this project?"
+    );
     if (isExecuted) {
       deleteProject();
     }
-  }
+  };
 
   const goAdd = () => {
-    let path = '/add';
-    navigate(path, { state: {
+    let path = "/add";
+    navigate(path, {
+      state: {
         ID: ID,
-        UserStories: UserStories
-      }});
+        UserStories: UserStories,
+      },
+    });
   };
-  
+
   return (
     <div>
       <div class="header">
@@ -57,31 +73,30 @@ function ProjectHub() {
             <img src={Lion} width="40" onClick={goBack} className="lionimg" />
           </div>
           <h3>{ProjectName}</h3>
-          <h6>Add Wiki</h6>
+          <h6 onClick={() => editWiki(ProjectWiki)}>Add Wiki </h6>
           <h6 onClick={goAdd}>Add new user story</h6>
           <h6 onClick={tryDelete}>Delete project</h6>
-
         </div>
         <h3>User Stories</h3>
-        <div className = "storycont">
-        {UserStories.map((story) => {
+        <div className="storycont">
+          {UserStories.map((story) => {
             return (
-              <div key={story.id} className = 'story-div'>
+              <div key={story.id} className="story-div">
                 <h4>{story.UserStory}</h4>
                 <div className="story-bottom">
-                <p className="story-details">Posted by: {story.UserPoster}</p>
-                <p className="story-details">Status: {story.UserStatus}</p>
+                  <p className="story-details">Posted by: {story.UserPoster}</p>
+                  <p className="story-details">Status: {story.UserStatus}</p>
                 </div>
               </div>
-            )
-        })}
+            );
+          })}
         </div>
       </div>
       <div>
         <Footer />
       </div>
     </div>
-  )
+  );
 }
 
-export default ProjectHub
+export default ProjectHub;

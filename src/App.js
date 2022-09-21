@@ -1,26 +1,23 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { React, useState } from "react";
 
-import { EmailContext } from './context';
-import Login from './Screens/Login/Login';
-import MyProjects from './Components/Projects/MyProjects/MyProjects';
-import CreateProject from './Components/Projects/CreateProject/CreateProject/CreateProject';
-import SplashScreen from './Screens/SplashScreen/SplashScreen';
+import { EmailContext } from "./context";
+import Login from "./Screens/Login/Login";
+import MyProjects from "./Components/Projects/MyProjects/MyProjects";
+import CreateProject from "./Components/Projects/CreateProject/CreateProject/CreateProject";
+import SplashScreen from "./Screens/SplashScreen/SplashScreen";
 import SignUp from "./Screens/SignUp/SignUp";
 import Landing from "./Screens/Landing/Landing";
-import ProfileSettings from './Components/Profile/ProfileSettings';
-import Scrum from './Components/Projects/CreateProject/Scrum/Scrum';
-import ProjectHub from './Screens/ProjectHub/ProjectHub';
-import Contact from './Screens/Contact/Contact';
+import ProfileSettings from "./Components/Profile/ProfileSettings";
+import Scrum from "./Components/Projects/CreateProject/Scrum/Scrum";
+import ProjectHub from "./Screens/ProjectHub/ProjectHub";
+import Contact from "./Screens/Contact/Contact";
 import ContactB from "./Screens/ContactB/ContactB";
 import Add from "./Screens/Add/Add";
+import Wiki from "./Screens/Wiki/Wiki";
 
 function App() {
-  const [userEmail, setUserEmail] = useState('');
+  const [userEmail, setUserEmail] = useState("");
 
   return (
     <EmailContext.Provider value={{ userEmail, setUserEmail }}>
@@ -38,10 +35,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/contactb" element={<ContactB />} />
           <Route path="/add" element={<Add />} />
-
-
-
-
+          <Route path="/Wiki" element={<Wiki />} />
         </Routes>
       </BrowserRouter>
     </EmailContext.Provider>
