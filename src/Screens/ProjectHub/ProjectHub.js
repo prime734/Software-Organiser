@@ -4,6 +4,7 @@ import { db } from '../../firebase';
 import { doc, deleteDoc } from "firebase/firestore";
 import { EmailContext } from "../../context";
 
+import Lion from "../../images/Lion-white.png";
 import './ProjectHub.css';
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
@@ -15,7 +16,8 @@ function ProjectHub() {
     ProjectName,
     ProjectOwner,
     ProjectMembers,
-    ProjectDesc
+    ProjectDesc,
+    UserStories
   } = state;
   let navigate = useNavigate();
   const { userEmail, setUserEmail } = useContext(EmailContext);
@@ -24,7 +26,7 @@ function ProjectHub() {
     navigate(-1);
   };
 
-  const deleteEmployee = async () => {
+  const deleteProject = async () => {
     await deleteDoc(doc(db, 'Projects', ID));
     goBack();
   }
@@ -32,10 +34,17 @@ function ProjectHub() {
   const tryDelete = () => {
     let isExecuted = window.confirm('Are you sure you want to delete this project?');
     if (isExecuted) {
-      deleteEmployee();
+      deleteProject();
     }
   }
 
+  const goAdd = () => {
+    let path = '/add';
+    navigate(path, { state: {
+        ID: ID,
+        UserStories: UserStories
+      }});
+  };
   
   return (
     <div>
@@ -43,10 +52,30 @@ function ProjectHub() {
         <Header />
       </div>
       <div class="body">
-        <h1>{ProjectName}</h1>
-        <h6>{ProjectDesc}</h6>
+        <div className="side-content">
+          <div className="liondiv">
+            <img src={Lion} width="40" onClick={goBack} className="lionimg" />
+          </div>
+          <h3>{ProjectName}</h3>
+          <h6>Add Wiki</h6>
+          <h6 onClick={goAdd}>Add new user story</h6>
+          <h6 onClick={tryDelete}>Delete project</h6>
 
-        <button className = 'delete-btn' onClick={tryDelete}>DELETE</button>
+        </div>
+        <h3>User Stories</h3>
+        <div className = "storycont">
+        {UserStories.map((story) => {
+            return (
+              <div key={story.id} className = 'story-div'>
+                <h4>{story.UserStory}</h4>
+                <div className="story-bottom">
+                <p className="story-details">Posted by: {story.UserPoster}</p>
+                <p className="story-details">Status: {story.UserStatus}</p>
+                </div>
+              </div>
+            )
+        })}
+        </div>
       </div>
       <div>
         <Footer />

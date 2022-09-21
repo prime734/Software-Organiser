@@ -33,7 +33,7 @@ export default function ContactB() {
   return (
     <div>
       <Header />
-      <br />
+      <div class="body">
       <h2 className="heading">Contact Us</h2>
 
       <div className="contact-card">
@@ -64,8 +64,7 @@ export default function ContactB() {
         <input type="submit" value="Submit" className = "subbut"/>
       </form>
       </div>
-
-      <br/>
+      </div>
 
       <div class="footer">
         <Footer />
