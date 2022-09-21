@@ -39,8 +39,9 @@ function Wiki() {
       </div>
       <div class="body">
         <h1>{ProjectWiki}</h1>
-        <input
-          className="Wiki-input"
+        <textarea
+          type="text"
+          className="editinput"
           defaultValue={ProjectWiki}
           onChange={Setwiki}
         />
