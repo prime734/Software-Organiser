@@ -14,13 +14,13 @@ import Lion from "../../images/Lion-white.png";
 
 function Add() {
   const { state } = useLocation();
-  const { ID, UserStories, ProjectName, ProjectWiki } = state;
+  const { ID, UserStories, ProjectName, ProjectWiki } = state;    //state from previous page
   let navigate = useNavigate();
-  const { userEmail, setUserEmail } = useContext(EmailContext);
+  const { userEmail, setUserEmail } = useContext(EmailContext);   //email of user logged in
   const [userStory, setUserStory] = useState('');
-  const [status, setStatus] = useState('New');
+  const [status, setStatus] = useState('New');      //default status for new user story is new
 
-  const addUserStory = async () => {
+  const addUserStory = async () => {      //adds new user story to the project in database
     let timestamp = Timestamp.fromDate(new Date());
     const prref = doc(db, 'Projects', ID);
     await updateDoc(prref , {

@@ -19,7 +19,7 @@ function ProjectHub() {
     ProjectDesc,
     UserStories,
     ProjectWiki,
-  } = state;
+  } = state;      //state from previous page
   let navigate = useNavigate();
   const { userEmail, setUserEmail } = useContext(EmailContext);
 
@@ -40,13 +40,13 @@ function ProjectHub() {
     });
   }
 
-  const deleteProject = async () => {
+  const deleteProject = async () => {     //handles delete on single project
     await deleteDoc(doc(db, "Projects", ID));
     goBack();
   };
 
-  const tryDelete = () => {
-    let isExecuted = window.confirm(
+  const tryDelete = () => {     //confrms intention to delete a single project
+    let isExecuted = window.confirm(    //pop up to confirm deletion
       "Are you sure you want to delete this project?"
     );
     if (isExecuted) {
@@ -54,7 +54,7 @@ function ProjectHub() {
     }
   };
 
-  const goAdd = () => {
+  const goAdd = () => {   //navigates to adding stories
     let path = "/add";
     navigate(path, {
       state: {
