@@ -12,7 +12,7 @@ function deleteStory(arr, story) {
         const filtered = arr.filter(function (tea) {
             return tea != story;
         });
-        return filtered
+        return "Done"
     }
     else {
         return "Cannot delete story as it does not exist in the database"
@@ -26,7 +26,7 @@ function addStory(arr, story) {
     }
     else {
         arr.push(story);
-        return arr
+        return "Done"
     }
 }
 
@@ -37,12 +37,26 @@ function editStory(arr, story, newstory) {
                 tea = newteam;
             }
         })
-        return arr
+        return "Done"
     }
     else {
-        return "team does not exist in the database"
+        return "story does not exist in the database"
     }
 
 }
 
-module.exports = [deleteStory, addStory, editStory];
+function addWiki(oldwiki, newwiki) {
+    if (oldwiki == newwiki){
+        return "Nothing has changed"
+    }
+    if (newwiki == ""){
+        return oldwiki
+    }
+    else {
+        oldwiki = oldwiki.concat(newwiki);
+        return oldwiki
+    }
+
+}
+
+module.exports = [deleteStory, addStory, editStory, addWiki];

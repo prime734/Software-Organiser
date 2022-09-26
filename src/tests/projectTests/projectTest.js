@@ -12,7 +12,7 @@ function deleteProject(arr, project){
         const filtered = arr.filter(function (proj) {
             return proj != project;
         });
-        return filtered
+        return "Done"
     }
     else {
         return "Cannot delete project as it does not exist in the database"
@@ -26,7 +26,7 @@ function addProject(arr, project){
     }
     else {
         arr.push(project);
-        return arr
+        return "Done"
     }
 }
 
@@ -37,7 +37,7 @@ function editProject(arr, project, newproject){
                 proj = newproject;
             }
         })
-        return arr
+        return "Done"
     }
     else {
         return "Project does not exist in the database"

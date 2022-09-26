@@ -12,7 +12,7 @@ function deleteTeam(arr, team) {
         const filtered = arr.filter(function (tea) {
             return tea != team;
         });
-        return filtered
+        return "Done"
     }
     else {
         return "Cannot delete team as it does not exist in the database"
@@ -26,7 +26,7 @@ function addTeam(arr, team) {
     }
     else {
         arr.push(team);
-        return arr
+        return "Done"
     }
 }
 
@@ -37,7 +37,7 @@ function editTeam(arr, team, newteam) {
                 tea = newteam;
             }
         })
-        return arr
+        return "Done"
     }
     else {
         return "team does not exist in the database"
