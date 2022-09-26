@@ -34,7 +34,7 @@ function editStory(arr, story, newstory) {
     if (checkStory(arr, story)) {
         arr.map((tea) => {
             if (tea == story) {
-                tea = newteam;
+                tea = newstory;
             }
         })
         return "Done"

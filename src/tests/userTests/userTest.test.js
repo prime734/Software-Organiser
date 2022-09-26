@@ -13,6 +13,10 @@ test("tries to add a story", () => {
     expect(adder(['abc', 'bac'], 'cab')).toBe("Done");
 })
 
+test("tries to add a story", () => {
+    expect(editor(['abc', 'bac','cab'], 'cab','cas')).toBe("Done");
+})
+
 test("tries to add a wiki", () => {
     expect(wiki('old wiki', 'old wiki')).toBe("Nothing has changed");
 })
