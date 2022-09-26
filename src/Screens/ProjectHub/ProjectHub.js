@@ -34,6 +34,8 @@ function ProjectHub() {
       state: {
         ProjectWiki: ProjectWiki,
         ID: ID,
+        ProjectName: ProjectName,
+        UserStories: UserStories
       },
     });
   }
@@ -58,6 +60,8 @@ function ProjectHub() {
       state: {
         ID: ID,
         UserStories: UserStories,
+        ProjectWiki: ProjectWiki,
+        ProjectName: ProjectName
       },
     });
   };

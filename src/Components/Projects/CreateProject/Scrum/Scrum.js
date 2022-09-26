@@ -12,7 +12,7 @@ import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
-import { doc, getDoc, setDoc, addDoc, collection } from "firebase/firestore";
+import { doc, getDoc, setDoc, addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import "./Scrum.css";
 import { EmailContext } from "../../../../context";
@@ -43,6 +43,7 @@ function Scrum() {
     };
 
     const createNewProject = async () => {
+        let timestamp = Timestamp.fromDate(new Date());
         await setDoc(
             doc(collection(db, "Projects")),
             {
@@ -51,6 +52,7 @@ function Scrum() {
                 ProjectDesc: projectDesc,
                 ProjectTeam: teamName,
                 ProjectMembers: [userEmail],
+                UserStories:[{UserDate: timestamp, UserPoster: userEmail, UserStatus: 'New', UserStory: 'This is your first user story'}]
             },
             { merge: true }
         );

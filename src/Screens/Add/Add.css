@@ -11,9 +11,9 @@
     cursor: pointer;
 }
 
-.edtinput{
-    width:50%;
-    height:100px;
+.edtinput {
+    width: 90%;
+    height: 200px;
     border: 1px solid #B38B59;
     border-radius: 3px;
     font-size: 18px;
