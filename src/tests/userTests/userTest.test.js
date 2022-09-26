@@ -21,3 +21,6 @@ test("tries to add a wiki", () => {
     expect(wiki('old wiki', 'old wiki')).toBe("Nothing has changed");
 })
 
+test("tries to add a wiki", () => {
+    expect(wiki('old wiki', '')).toBe('old wiki');
+})
