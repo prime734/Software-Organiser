@@ -19,7 +19,7 @@ import Lion from "../../images/Lion.json";
 function SplashScreen() {
   let navigate = useNavigate();
 
-  const routeChange = () => {       //router function to change navigate site
+  const routeChange = () => {       ///router function to change navigate site
     let path = "/signup";
     navigate(path);
   };

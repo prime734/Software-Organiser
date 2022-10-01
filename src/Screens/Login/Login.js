@@ -36,6 +36,7 @@ function Login() {
     const Setpassword = event => {
         setPassword(event.target.value);
     }
+    
     const OnLogin = () => {
         //send a function to the database to check if log the user in
 
@@ -65,6 +66,10 @@ function Login() {
         let path = "/forgotpass";
         navigate(path);
     }
+    const registerhere = () => {       //router function to change navigate site
+        let path = "/signup";
+        navigate(path);
+    };
 
     return (
         <div >
@@ -78,6 +83,9 @@ function Login() {
                         <input className='login-input' type="password" placeholder="Password" onChange={Setpassword} /> <br />
                         <button className='forget-password-button' onClick={OnForgot}>Forgot Password?</button><br />
                         <button class="Loginbutton" onClick={OnLogin}>Login</button>
+                        <br/>
+                        <button className='registerHere' onClick={registerhere}>New To Lion? Sign Up Here</button><br />
+
                     </div>
                 </div>
                 <div className='background'></div>

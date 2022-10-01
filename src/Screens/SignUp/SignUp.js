@@ -28,6 +28,10 @@ function SignUp() {
         let path = '/landing';
         navigate(path, { state: {email: email}});
     }
+    const loginhere = () => {       ///router function to change navigate site
+        let path = "/login";
+        navigate(path);
+      };
     const Setname = event => {
         setName(event.target.value);
     }
@@ -96,6 +100,8 @@ function SignUp() {
                         <input className='login-input' type="email" placeholder="Email" onChange={Setemail} /><br />
                         <input className='login-input' type="password" placeholder="Password" onChange={Setpassword} /> <br />
                         <button class="Loginbutton" onClick={OnSignup}>Sign-Up</button><br />
+                        <button className='loginhere' onClick={loginhere}>Already Have An Account? Login Here</button><br />
+
                         <br />
                     </div>
                 </div>
