@@ -126,14 +126,14 @@ function ProjectHub() {
             <br/>
             Wiki
           </button>
-          <button className={toggleState === 4 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(3)}>
+          <button className={toggleState === 4 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(4)}>
             <span class="material-symbols-outlined">
               insights
             </span>
             <br />
             Insights
           </button>
-          <button className={toggleState === 5 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(4)}>
+          <button className={toggleState === 5 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(5)}>
             <span class="material-symbols-outlined">
               settings
             </span>
