@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { db } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { EmailContext } from "../../context";
 
 import "./Landing.css";
@@ -11,6 +11,7 @@ import NewProject from "../../images/new_project.svg";
 
 function Landing() {
   const [projects, setProjects] = useState([]); //array to store user's projects'
+  const [myprojects, setMyProjects] = useState([]);
   const projectRef = collection(db, "Projects"); //collection reference to all projects
   const [teams, setTeams] = useState([]); //array to store user's teams'
   const teamRef = collection(db, "Teams"); //collection reference to all teams
@@ -44,19 +45,31 @@ function Landing() {
   useEffect(() => {
     const getProjects = async () => {
       //fetching all projects from database
-      const data = await getDocs(projectRef);
-      setProjects(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+
+      const q = query(projectRef , where("ProjectMembers", "array-contains", userEmail));
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setProjects(projects => [ ...projects,{ ...doc.data(), id: doc.id }]);
+      });
+      
     };
 
     const getTeams = async () => {
       //fetching all teams from database
-      const data = await getDocs(teamRef);
-      setTeams(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      const q = query(teamRef , where("TeamMembers", "array-contains", userEmail));
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setTeams(teams => [...teams, { ...doc.data(), id: doc.id }]);
+      });
     };
 
     getProjects();
     getTeams();
+
   }, []);
+
 
   /*---------------------------------------------------------------- */
 
@@ -74,23 +87,17 @@ function Landing() {
               <span class="material-symbols-outlined">add_circle</span>
             </h6>
           </div>
-          {projects
-            .filter((project) => {
-              if (project.ProjectOwner === userEmail) {
-                return project;
-              }
-            })
-            .map((project) => {
-              return (
-                <div
-                  key={project.id}
-                  className="project-div"
-                  onClick={() => editHub(project)}
-                >
-                  <h6>{project.ProjectName}</h6>
-                </div>
-              );
-            })}
+          {projects.map((project) => {
+            return (
+              <div
+                key={project.id}
+                className="project-div"
+                onClick={() => editHub(project)}
+              >
+                <h6>{project.ProjectName}</h6>
+              </div>
+            );
+          })}
         </div>
         <h4>My teams</h4>
         <div className="div-cont">
@@ -99,13 +106,7 @@ function Landing() {
               <span class="material-symbols-outlined">add_circle</span>
             </h6>
           </div>
-          {teams
-            .filter((team) => {
-              if (team.TeamOwner === userEmail) {
-                return team;
-              }
-            })
-            .map((team) => {
+          {teams.map((team) => {
               return (
                 <div key={team.id} className="team-div">
                   <h6>{team.TeamName}</h6>
