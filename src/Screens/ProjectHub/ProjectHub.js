@@ -126,7 +126,14 @@ function ProjectHub() {
             <br/>
             Wiki
           </button>
-          <button className={toggleState === 4 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(4)}>
+          <button className={toggleState === 4 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(3)}>
+            <span class="material-symbols-outlined">
+              insights
+            </span>
+            <br />
+            Insights
+          </button>
+          <button className={toggleState === 5 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(4)}>
             <span class="material-symbols-outlined">
               settings
             </span>
@@ -148,7 +155,12 @@ function ProjectHub() {
             {loading ? null : <Wiki project={project} />}
           </div>
 
+
           <div className={toggleState === 4 ? "content  active-content" : "content"}>
+            <p>Insights</p>
+          </div>
+
+          <div className={toggleState === 5 ? "content  active-content" : "content"}>
             <p>Settings</p>
           </div>
         </div>
