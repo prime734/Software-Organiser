@@ -1,27 +1,51 @@
 import { React, useState, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { db } from "../../firebase";
-import { doc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { EmailContext } from "../../context";
 
 import Lion from "../../images/Lion-white.png";
 import "./ProjectHub.css";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
+import UserStories from "../../Components/UserStories/UserStories";
+import Wiki from "../../Components/Wiki/Wiki";
 
 function ProjectHub() {
   const { state } = useLocation();
   const {
-    ID,
-    ProjectName,
-    ProjectOwner,
-    ProjectMembers,
-    ProjectDesc,
-    UserStories,
-    ProjectWiki,
+    pName,
   } = state;      //state from previous page
   let navigate = useNavigate();
   const { userEmail, setUserEmail } = useContext(EmailContext);
+  const projectRef = collection(db, "Projects");
+  const [project, setProject] = useState({});
+  const [toggleState, setToggleState] = useState(1);
+  const [loading, setLoading] = useState(true);
+
+
+  ////////////////////////////////////////////////////////////////
+
+  useEffect(() => {
+
+
+    const getProject = async () => {
+
+      const q = query(projectRef, where("ProjectName", "==", pName));
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setProject({ ...doc.data(), id: doc.id });
+        setLoading(false);
+
+        //console.log('Document data:', doc.data());
+      });
+
+    }
+
+    getProject();
+
+  },[]);
 
   const goBack = () => {
     navigate(-1);
@@ -29,19 +53,19 @@ function ProjectHub() {
 
   function editWiki(ProjectWiki) {
     //router function to view detials on single project
-    let path = "/Wiki";
-    navigate(path, {
-      state: {
-        ProjectWiki: ProjectWiki,
-        ID: ID,
-        ProjectName: ProjectName,
-        UserStories: UserStories
-      },
-    });
+    // let path = "/Wiki";
+    // navigate(path, {
+    //   state: {
+    //     ProjectWiki: ProjectWiki,
+    //     ID: ID,
+    //     ProjectName: ProjectName,
+    //     UserStories: UserStories
+    //   },
+    // });
   }
 
   const deleteProject = async () => {     //handles delete on single project
-    await deleteDoc(doc(db, "Projects", ID));
+    //await deleteDoc(doc(db, "Projects", ID));
     goBack();
   };
 
@@ -56,15 +80,21 @@ function ProjectHub() {
 
   const goAdd = () => {   //navigates to adding stories
     let path = "/add";
-    navigate(path, {
-      state: {
-        ID: ID,
-        UserStories: UserStories,
-        ProjectWiki: ProjectWiki,
-        ProjectName: ProjectName
-      },
-    });
+    // navigate(path, {
+    //   state: {
+    //     ID: ID,
+    //     UserStories: UserStories,
+    //     ProjectWiki: ProjectWiki,
+    //     ProjectName: ProjectName
+    //   },
+    // });
   };
+
+  const toggleTab = (index) => {
+    setToggleState(index);
+  };
+
+  //////////////////////////////////////////////////////////////////////
 
   return (
     <div>
@@ -72,29 +102,58 @@ function ProjectHub() {
         <Header />
       </div>
       <div class="body">
-        <div className="side-content">
-          <div className="liondiv">
-            <img src={Lion} width="40" onClick={goBack} className="lionimg" />
+        <h3>{pName}</h3>
+        <br/>
+        <div className="bloc-tabs">
+          <button className={toggleState === 1 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(1)}>
+            <span class="material-symbols-outlined">
+              checklist
+            </span>
+            <br/>
+            User Stories
+          </button>
+          <button className={toggleState === 2 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(2)}>
+            <span class="material-symbols-outlined">
+              view_kanban
+            </span>
+            <br/>
+            Kanban
+          </button>
+          <button className={toggleState === 3 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(3)}>
+            <span class="material-symbols-outlined">
+              import_contacts
+            </span>
+            <br/>
+            Wiki
+          </button>
+          <button className={toggleState === 4 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(4)}>
+            <span class="material-symbols-outlined">
+              settings
+            </span>
+            <br/>
+            Settings
+          </button>
+        </div>
+
+        <div className="content-tabs">
+          <div className={toggleState === 1 ? "content  active-content" : "content"}>
+            {loading ? null : <UserStories project = {project} />}
           </div>
-          <h3>{ProjectName}</h3>
-          <h6 onClick={() => editWiki(ProjectWiki)}>Add Wiki </h6>
-          <h6 onClick={goAdd}>Add new user story</h6>
-          <h6 onClick={tryDelete}>Delete project</h6>
+
+          <div className={toggleState === 2 ? "content  active-content" : "content"}>
+            <p>Kanban</p>
+          </div>
+
+          <div className={toggleState === 3 ? "content  active-content" : "content"}>
+            {loading ? null : <Wiki project={project} />}
+          </div>
+
+          <div className={toggleState === 4 ? "content  active-content" : "content"}>
+            <p>Settings</p>
+          </div>
         </div>
-        <h3>User Stories</h3>
-        <div className="storycont">
-          {UserStories.map((story) => {
-            return (
-              <div key={story.id} className="story-div">
-                <h4>{story.UserStory}</h4>
-                <div className="story-bottom">
-                  <p className="story-details">Posted by: {story.UserPoster}</p>
-                  <p className="story-details">Status: {story.UserStatus}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+
+
       </div>
       <div>
         <Footer />

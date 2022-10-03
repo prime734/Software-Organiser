@@ -11,7 +11,6 @@ import NewProject from "../../images/new_project.svg";
 
 function Landing() {
   const [projects, setProjects] = useState([]); //array to store user's projects'
-  const [myprojects, setMyProjects] = useState([]);
   const projectRef = collection(db, "Projects"); //collection reference to all projects
   const [teams, setTeams] = useState([]); //array to store user's teams'
   const teamRef = collection(db, "Teams"); //collection reference to all teams
@@ -31,13 +30,7 @@ function Landing() {
     let path = "/projecthub";
     navigate(path, {
       state: {
-        ID: project.id,
-        ProjectName: project.ProjectName,
-        ProjectOwner: project.ProjectOwner,
-        ProjectMembers: project.ProjectMembers,
-        ProjectDesc: project.ProjectDesc,
-        ProjectWiki: project.ProjectWiki,
-        UserStories: project.UserStories.reverse(),
+        pName: project.ProjectName
       },
     });
   }

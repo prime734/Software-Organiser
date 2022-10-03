@@ -13,9 +13,9 @@ import Lion from "../../images/Lion-white.png";
 function Wiki() {
   const { state } = useLocation();
   let navigate = useNavigate();
-  const { ProjectWiki, ID, ProjectName, UserStories } = state;
+  const { project  } = state;
 
-  const [wiki, setWiki] = useState({ ProjectWiki });
+  const [wiki, setWiki] = useState( project.ProjectWiki );
   const Setwiki = (event) => {
     setWiki(event.target.value);
   };
@@ -26,13 +26,14 @@ function Wiki() {
   const editWiki = async (wiki) => {
     //handles adding a wiki to database
     await setDoc(
-      doc(db, "Projects", ID),
+      doc(db, "Projects", project.id),
       {
         ProjectWiki: wiki,
       },
       { merge: true }
     );
     alert("Wiki edited");
+    goBack();
   };
 
   const goBack = () => {
@@ -40,51 +41,16 @@ function Wiki() {
   };
 
 
-  const deleteProject = async () => {
-    await deleteDoc(doc(db, "Projects", ID));
-    goBack();
-  };
-
-  const tryDelete = () => {
-    let isExecuted = window.confirm(
-      "Are you sure you want to delete this project?"
-    );
-    if (isExecuted) {
-      deleteProject();
-    }
-  };
-
-  const goAdd = () => {
-    let path = "/add";
-    navigate(path, {
-      state: {
-        ID: ID,
-        UserStories: UserStories,
-      },
-    });
-  };
-
   return (
     <div>
       <div class="header">
         <Header />
       </div>
       <div class="body">
-        <div className="side-content">
-          <div className="liondiv">
-            <img src={Lion} width="40" onClick={goBack} className="lionimg" />
-          </div>
-          <h3>{ProjectName}</h3>
-          <h6 onClick={() => editWiki(ProjectWiki)}>Add Wiki </h6>
-          <h6 onClick={goAdd}>Add new user story</h6>
-          <h6 onClick={tryDelete}>Delete project</h6>
-        </div>
-        <h1>{ProjectWiki}</h1>
-        <div>
         <textarea
           type="text"
           className="editinput"
-          defaultValue={ProjectWiki}
+          defaultValue={project.ProjectWiki}
           onChange={Setwiki}
           placeholder="Wiki..."
         />
@@ -92,8 +58,6 @@ function Wiki() {
         <button className="edtbtn" onClick={() => editWiki(wiki)}>
           Save
         </button>
-        </div>
-        <br />
       </div>
       <Footer />
     </div>

@@ -8,13 +8,12 @@ import { Timestamp, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import './Add.css';
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
-import Lion from "../../images/Lion-white.png";
 
 
 
 function Add() {
   const { state } = useLocation();
-  const { ID, UserStories, ProjectName, ProjectWiki } = state;    //state from previous page
+  const { project } = state;    //state from previous page
   let navigate = useNavigate();
   const { userEmail, setUserEmail } = useContext(EmailContext);   //email of user logged in
   const [userStory, setUserStory] = useState('');
@@ -22,52 +21,18 @@ function Add() {
 
   const addUserStory = async () => {      //adds new user story to the project in database
     let timestamp = Timestamp.fromDate(new Date());
-    const prref = doc(db, 'Projects', ID);
+    const prref = doc(db, 'Projects', project.id);
     await updateDoc(prref , {
-        UserStories: [...UserStories, {
+        UserStories: [{
             UserDate: timestamp,
             UserPoster: userEmail,
             UserStatus: status,
             UserStory: userStory
-        }]
+      }, ...project.UserStories]
     })
-    goBack();
+    navigate(-1);
   };
 
-  const goBack = () => {
-    let path = '/landing';
-    navigate(path);
-  }
-
-
-  function editWiki(ProjectWiki) {
-    //router function to view detials on single project
-    let path = "/Wiki";
-    navigate(path, {
-      state: {
-        ProjectWiki: ProjectWiki,
-        ID: ID,
-        ProjectName: ProjectName,
-        UserStories: UserStories
-      },
-    });
-  }
-
-  const deleteProject = async () => {
-    await deleteDoc(doc(db, "Projects", ID));
-    goBack();
-  };
-
-  const tryDelete = () => {
-    let isExecuted = window.confirm(
-      "Are you sure you want to delete this project?"
-    );
-    if (isExecuted) {
-      deleteProject();
-    }
-  };
-
-  
 
   return (
     <div>
@@ -75,15 +40,7 @@ function Add() {
             <Header />
         </div>
         <div class="body">
-        <div className="side-content">
-          <div className="liondiv">
-            <img src={Lion} width="40" onClick={goBack} className="lionimg" />
-          </div>
-          <h3>{ProjectName}</h3>
-          <h6 onClick={() => editWiki(ProjectWiki)}>Add Wiki </h6>
-          <h6>Add new user story</h6>
-          <h6 onClick={tryDelete}>Delete project</h6>
-        </div>
+        
             <h3>Add User Story</h3>
             <div className="indiv">
             <textarea className = 'edtinput' type="text" placeholder="User Story" onChange={(event)=> {setUserStory(event.target.value)}}/>
