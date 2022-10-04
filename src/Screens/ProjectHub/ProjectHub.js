@@ -10,6 +10,7 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import UserStories from "../../Components/UserStories/UserStories";
 import Wiki from "../../Components/Wiki/Wiki";
+import Insights from "../Insights/Insights";
 
 function ProjectHub() {
   const { state } = useLocation();
@@ -131,7 +132,7 @@ function ProjectHub() {
               insights
             </span>
             <br />
-            Insights
+             Insights
           </button>
           <button className={toggleState === 5 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(5)}>
             <span class="material-symbols-outlined">
@@ -157,7 +158,7 @@ function ProjectHub() {
 
 
           <div className={toggleState === 4 ? "content  active-content" : "content"}>
-            <p>Insights</p>
+            <Insights/>
           </div>
 
           <div className={toggleState === 5 ? "content  active-content" : "content"}>

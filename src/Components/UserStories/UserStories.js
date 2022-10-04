@@ -14,6 +14,7 @@ function UserStories(props) {
               <h4>{story.UserStory}</h4>
               <div className="story-bottom">
                 <p className="story-details">Posted by: {story.UserPoster}</p>
+                <p className="story-details">Assigned To: {story.AssignedTo}</p>
                 <p className="story-details">Status: {story.UserStatus}</p>
               </div>
             </div>
