@@ -52,7 +52,8 @@ function Scrum() {
         ProjectWiki: "",
         ProjectTeam: teamName,
         ProjectMembers: [userEmail],
-        UserStories:[{UserDate: timestamp, UserPoster: userEmail, UserStatus: 'New', UserStory: 'This is your first user story'}]
+        UserStories:[{UserDate: timestamp, UserPoster: userEmail, UserStatus: 'New', UserStory: 'This is your first user story', AssignedTo: userEmail}],
+        Documents: []
 
       },
       { merge: true }

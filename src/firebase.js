@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "@firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getStorage } from "firebase/storage";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyDPar9XU2BpATfXY6tHU9-3T1xRYS7J6Xs",
@@ -15,6 +17,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth();
+
+export const storage = getStorage(app);
 
 export function signupmethod(email, password) {         //function used to sign up new user on database
     return createUserWithEmailAndPassword(auth, email, password)
