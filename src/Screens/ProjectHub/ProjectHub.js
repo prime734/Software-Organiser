@@ -158,7 +158,7 @@ function ProjectHub() {
 
 
           <div className={toggleState === 4 ? "content  active-content" : "content"}>
-            <Insights/>
+            {loading ? null : <Insights/>}
           </div>
 
           <div className={toggleState === 5 ? "content  active-content" : "content"}>
