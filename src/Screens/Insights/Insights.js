@@ -113,7 +113,10 @@ export default function Insights(){
 }
 
 
-/*  const [projects, setProjects] = useState([]); //array to store user's projects'
+/* DONT MIND THIS!!! 
+
+
+const [projects, setProjects] = useState([]); //array to store user's projects'
     const projectRef = collection(db, "Projects"); //collection reference to all projects
     const { userEmail, setUserEmail } = useContext(EmailContext); //email address of user logged in
     const [stories, setStories] = useState([]);
