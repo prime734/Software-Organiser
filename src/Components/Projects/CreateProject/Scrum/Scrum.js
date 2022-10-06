@@ -68,6 +68,10 @@ function Scrum() {
       { merge: true }
     );
     routeChange();
+    
+    setTeamName('');
+    setProjectDesc('');
+    setProjectName('');
   };
 
   return (
@@ -88,6 +92,7 @@ function Scrum() {
           }}
           required
           label="Project Name"
+          value={projectName}
         />
         <TextField
           onChange={(event) => {
@@ -96,6 +101,7 @@ function Scrum() {
           multiline
           required
           label="Team Name"
+          value={teamName}
         />
         <TextField
           onChange={(event) => {
@@ -105,6 +111,7 @@ function Scrum() {
           multiline
           required
           label="Project Description"
+          value={projectDesc}
         />
         <Button
           className="btn-create-project"

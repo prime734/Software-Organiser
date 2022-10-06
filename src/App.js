@@ -4,7 +4,6 @@ import { React, useState } from "react";
 import { EmailContext } from "./context";
 import Login from "./Screens/Login/Login";
 import MyProjects from "./Components/Projects/MyProjects/MyProjects";
-import CreateProject from "./Components/Projects/CreateProject/CreateProject/CreateProject";
 import SplashScreen from "./Screens/SplashScreen/SplashScreen";
 import SignUp from "./Screens/SignUp/SignUp";
 import Landing from "./Screens/Landing/Landing";
@@ -30,7 +29,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/myprojects" element={<MyProjects />} />
           <Route path="/landing" element={<Landing />} />
-          <Route path="createprojects" element={<CreateProject />} />
           <Route path="scrum" element={<Scrum />} />
           <Route path="profilesettings" element={<ProfileSettings />} />
           <Route path="projecthub" element={<ProjectHub />} />
