@@ -1,6 +1,12 @@
 import { React, useState, useEffect, useContext } from "react";
 import { db } from "../../firebase";
-import { collection, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  setDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import "./Wiki.css";
@@ -9,13 +15,12 @@ import Footer from "../../Components/Footer/Footer";
 import { AiOutlineConsoleSql } from "react-icons/ai";
 import Lion from "../../images/Lion-white.png";
 
-
 function Wiki() {
   const { state } = useLocation();
   let navigate = useNavigate();
-  const { project  } = state;
+  const { project } = state;
 
-  const [wiki, setWiki] = useState( project.ProjectWiki );
+  const [wiki, setWiki] = useState(project.ProjectWiki);
   const Setwiki = (event) => {
     setWiki(event.target.value);
   };
@@ -39,7 +44,6 @@ function Wiki() {
   const goBack = () => {
     navigate(-1);
   };
-
 
   return (
     <div>

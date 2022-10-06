@@ -51,13 +51,13 @@ function AddMember() {
       <div class="body">
         <textarea
           type="text"
-          className="editinput"
+          className="editmember"
           onChange={Setname}
           placeholder="New member..."
         />
 
-        <button className="edtbtn" onClick={() => addMember(name)}>
-          Save
+        <button className="edtbtnmember" onClick={() => addMember(name)}>
+          Add
         </button>
       </div>
       <Footer />
