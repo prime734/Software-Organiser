@@ -46,9 +46,34 @@ export default function Insights(){
 
     let numStories = stories.length;
 
-    var numDone = 1;
-    var numNew = 2;
-    var numProgress = 1;
+    var numDone = 0;
+    var numNew = 0;
+    var numProgress = 0;
+
+    var statusArray = [];
+
+    /*for(let i=0;i<3; i++){
+        statusArray[i] = stories.at(i).UserStatus;
+    }*/
+    stories.forEach((stories) => {
+        for(const key in stories){
+          if(stories[key] == "New"){
+            numNew++
+          }
+          if(stories[key] == "Done"){
+            numDone++;
+          }
+          if(stories[key] == "In Progress"){
+            numProgress++;
+          }
+          
+        }
+    });
+
+    console.log(statusArray)
+    console.log(numDone)
+
+
 
     
 
