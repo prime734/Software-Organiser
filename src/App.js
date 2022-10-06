@@ -15,6 +15,7 @@ import Contact from "./Screens/Contact/Contact";
 import ContactB from "./Screens/ContactB/ContactB";
 import Add from "./Screens/Add/Add";
 import Wiki from "./Screens/Wiki/Wiki";
+import AddMember from "./Screens/AddMember/AddMember";
 import ForgotPass from "./Screens/ForgotPass/ForgotPass";
 import AddDocument from "./Screens/AddDocument/AddDocument";
 
@@ -38,9 +39,9 @@ function App() {
           <Route path="/contactb" element={<ContactB />} />
           <Route path="/add" element={<Add />} />
           <Route path="/Wiki" element={<Wiki />} />
+          <Route path="/AddMember" element={<AddMember />} />
           <Route path="/forgotpass" element={<ForgotPass />} />
           <Route path="/adddocument" element={<AddDocument />} />
-
         </Routes>
       </BrowserRouter>
     </EmailContext.Provider>

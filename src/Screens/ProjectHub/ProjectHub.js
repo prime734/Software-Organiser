@@ -10,6 +10,7 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import UserStories from "../../Components/UserStories/UserStories";
 import Wiki from "../../Components/Wiki/Wiki";
+import Member from "../../Components/Member/Member";
 
 function ProjectHub() {
   const { state } = useLocation();
@@ -189,7 +190,7 @@ function ProjectHub() {
               toggleState === 6 ? "content  active-content" : "content"
             }
           >
-            <p>Insights</p>
+            {loading ? null : <Member project={project} />}
           </div>
 
           <div
