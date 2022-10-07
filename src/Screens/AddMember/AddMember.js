@@ -21,19 +21,16 @@ function AddMember() {
   let navigate = useNavigate();
   const { project } = state;
 
-  const [name, setName] = useState();
+  const [name, setName] = useState('');
   const Setname = (event) => {
     setName(event.target.value);
   };
 
-  const [projects, setProjects] = useState([]); //array to store user's projects'
-  const projectRef = collection(db, "Projects"); //collection reference to all projects
-
-  const addMember = async (name) => {
+  const addMember = async () => {
     //handles adding a new member to the project/team
     const prref = doc(db, "Projects", project.id);
     await updateDoc(prref, {
-      ProjectMembers: [...ProjectMembers, name],
+      ProjectMembers: [...project.ProjectMembers, name],
     });
     alert("Member Added");
     goBack();
@@ -56,7 +53,7 @@ function AddMember() {
           placeholder="New member..."
         />
 
-        <button className="edtbtnmember" onClick={() => addMember(name)}>
+        <button className="edtbtnmember" onClick={addMember}>
           Add
         </button>
       </div>
