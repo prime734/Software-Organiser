@@ -97,7 +97,7 @@ export default function Insights(){
     const data = [
         {name: 'User Stories That Is/Are DONE', users: numDone},
         {name: 'User Stories In PROGRESS', users: numProgress},
-        {name: 'User Stories Is/That Are NEW', users: numNew},
+        {name: 'User Stories That Is/Are NEW', users: numNew},
       ];
       const COLORS = ['#b3ebad', '#e4b1a5', '#dcb7b2'];
       const RADIAN = Math.PI / 180;
@@ -113,6 +113,7 @@ export default function Insights(){
           </text>
         );
       };
+      let projName = pName.toUpperCase();
       
 
     
@@ -130,7 +131,7 @@ export default function Insights(){
             );
             })}
             <h3 >
-              {pName} USER STORIES
+              User Stories For {projName}
             </h3>
             <p>
                 The Pie Chart Below Shows User Stories That Are New,
@@ -164,6 +165,54 @@ export default function Insights(){
 
     );  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* DONT MIND THIS!!! 
