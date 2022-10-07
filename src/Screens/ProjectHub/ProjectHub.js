@@ -10,6 +10,7 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import UserStories from "../../Components/UserStories/UserStories";
 import Wiki from "../../Components/Wiki/Wiki";
+import Kanban from "../../Components/Kanban/Kanban";
 
 function ProjectHub() {
   const { state } = useLocation();
@@ -148,7 +149,7 @@ function ProjectHub() {
           </div>
 
           <div className={toggleState === 2 ? "content  active-content" : "content"}>
-            <p>Kanban</p>
+            {loading ? null : <Kanban project = {project}/>}
           </div>
 
           <div className={toggleState === 3 ? "content  active-content" : "content"}>
