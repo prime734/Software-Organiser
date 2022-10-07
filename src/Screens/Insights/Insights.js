@@ -3,13 +3,16 @@ import { useLocation } from "react-router-dom";
 import { React, useEffect, useState, useContext } from 'react';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { EmailContext } from "../../context";
-import { PieChart, Pie, Tooltip} from 'recharts';
+import { PieChart, Pie, Tooltip, Cell} from 'recharts';
+import { async } from '@firebase/util';
 
 export default function Insights(){
 
 
     const [projects, setProjects] = useState([]); //array to store user's projects'
     const projectRef = collection(db, "Projects"); //collection reference to all projects
+    const [users, setUsers] = useState([]); //array to store user'
+    const userRef = collection(db, "Users"); //collection reference to all users
     const { userEmail, setUserEmail } = useContext(EmailContext); //email address of user logged in
     const [stories, setStories] = useState([]);
     const { state } = useLocation();
@@ -32,7 +35,19 @@ export default function Insights(){
           });
           
         };
+        const getUsers = async () => {
+          //fetching all users from the database
+
+          const i = query(userRef , where("Email", "==", userEmail));
+          const querySnapshot = await getDocs(i);
+          querySnapshot.forEach((doc) => {
+            setUsers(users => [ ...users,{ ...doc.data(), id: doc.id }]);
+
+          });
+
+        }
         getProjects();
+        getUsers();
     
     }, []);
 
@@ -43,6 +58,7 @@ export default function Insights(){
         })
       })
     },[projects]);
+    
 
     let numStories = stories.length;
 
@@ -55,6 +71,9 @@ export default function Insights(){
     /*for(let i=0;i<3; i++){
         statusArray[i] = stories.at(i).UserStatus;
     }*/
+    
+
+    //counting how many user stories are done,in progress or new
     stories.forEach((stories) => {
         for(const key in stories){
           if(stories[key] == "New"){
@@ -70,28 +89,58 @@ export default function Insights(){
         }
     });
 
-    console.log(statusArray)
-    console.log(numDone)
-
 
 
     
 
 
     const data = [
-        {name: 'Done User Stories', users: numDone},
-        {name: 'User Stories In Progress', users: numProgress},
-        {name: 'New User Stories', users: numNew},
+        {name: 'User Stories That Is/Are DONE', users: numDone},
+        {name: 'User Stories In PROGRESS', users: numProgress},
+        {name: 'User Stories Is/That Are NEW', users: numNew},
       ];
+      const COLORS = ['#b3ebad', '#e4b1a5', '#dcb7b2'];
+      const RADIAN = Math.PI / 180;
+
+      const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+        const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+      
+        return (
+          <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+            {`${(percent * 100).toFixed(0)}%`}
+          </text>
+        );
+      };
+      
+
     
 
     return(
 
         <div>
             <div style={{textAlign : "center"}}>
-            <h1>
-                Total Number Of User Stories: {numStories}
-            </h1>
+            {users.map((user) => {
+            return (
+              <div
+                key={user.id}>
+                <h2>{user.Name} {user.Surname}</h2>
+              </div>
+            );
+            })}
+            <h3 >
+              {pName} USER STORIES
+            </h3>
+            <p>
+                The Pie Chart Below Shows User Stories That Are New,
+                Still In Progress Or Done.
+            </p>
+            <br/>
+
+            <h6>
+                Total Number Of User Stories :  {numStories}
+            </h6>
             <PieChart width={700} height={700}>
                 <Pie
                     dataKey="users"
@@ -102,8 +151,12 @@ export default function Insights(){
                     cy={250}
                     outerRadius={210}
                     fill="#8E0808"
-                    label
-                />
+                    label={renderCustomizedLabel}
+                >
+                  {data.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                  </Pie>
                 <Tooltip />
             </PieChart>
         </div>
