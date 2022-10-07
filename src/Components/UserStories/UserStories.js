@@ -10,7 +10,7 @@ function UserStories(props) {
       <div className = "storycont">
         {props.project.UserStories.map((story) => {
           return (
-            <div key={story.id} className="story-div">
+            <div key={story.UserStory} className="story-div">
               <h4>{story.UserStory}</h4>
               <div className="story-bottom">
                 <p className="story-details">Posted by: {story.UserPoster}</p>
