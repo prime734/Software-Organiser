@@ -9,12 +9,9 @@ import UserStories from '../../Components/UserStories/UserStories';
 
 export default function Insights(props){
 
-    const [projects, setProjects] = useState([]); //array to store user's projects'
-    const projectRef = collection(db, "Projects"); //collection reference to all projects
     const [users, setUsers] = useState([]); //array to store user'
     const userRef = collection(db, "Users"); //collection reference to all users
     const { userEmail, setUserEmail } = useContext(EmailContext); //email address of user logged in
-    const [stories, setStories] = useState([]);
     const { state } = useLocation();
     const {
         pName,
@@ -42,8 +39,11 @@ export default function Insights(props){
     var numNew = 0;
     var numProgress = 0;
 
+    const membersArray = props.project.ProjectMembers;
+
+    console.log(membersArray)
+
     ///counting how many user stories are done,in progress or new
-    
     const storyArray =props.project.UserStories
     let numStories = storyArray.length
     storyArray.forEach((story)=>{
@@ -63,9 +63,7 @@ export default function Insights(props){
         }
 
       }
-
-    })
-
+    });
 
     let data = [
         {name: 'User Stories That Is/Are DONE', users: numDone},
@@ -74,7 +72,7 @@ export default function Insights(props){
       ];
       const COLORS = ['#b3ebad', '#e4b1a5', '#dcb7b2'];
       const RADIAN = Math.PI / 180;
-
+      //Calculating the number of user stories to be on percentages
       const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -87,11 +85,6 @@ export default function Insights(props){
         );
       };
       let projName = pName.toUpperCase();
-
-      
-      
-
-    
 
     return(
 
@@ -117,6 +110,11 @@ export default function Insights(props){
             <h6>
                 Total Number Of User Stories :  {numStories}
             </h6>
+
+            <h6>
+                Total Number Of Your Members :  {membersArray.length}
+            </h6>
+
             <PieChart width={700} height={700}>
                 <Pie
                     dataKey="users"
