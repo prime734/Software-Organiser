@@ -40,9 +40,6 @@ export default function Insights(props){
     var numProgress = 0;
 
     const membersArray = props.project.ProjectMembers;
-
-    console.log(membersArray)
-
     ///counting how many user stories are done,in progress or new
     const storyArray =props.project.UserStories
     let numStories = storyArray.length
