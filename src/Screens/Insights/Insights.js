@@ -5,9 +5,9 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { EmailContext } from "../../context";
 import { PieChart, Pie, Tooltip, Cell} from 'recharts';
 import { async } from '@firebase/util';
+import UserStories from '../../Components/UserStories/UserStories';
 
-export default function Insights(){
-
+export default function Insights(props){
 
     const [projects, setProjects] = useState([]); //array to store user's projects'
     const projectRef = collection(db, "Projects"); //collection reference to all projects
@@ -23,18 +23,6 @@ export default function Insights(){
 
 
     useEffect(() => {
-        const getProjects = async () => {
-          //fetching all projects from database
-    
-          const q = query(projectRef , where("ProjectName", "==", pName));
-    
-          const querySnapshot = await getDocs(q);
-          querySnapshot.forEach((doc) => {
-            setProjects(projects => [ ...projects,{ ...doc.data(), id: doc.id }]);
-
-          });
-          
-        };
         const getUsers = async () => {
           //fetching all users from the database
 
@@ -46,55 +34,40 @@ export default function Insights(){
           });
 
         }
-        getProjects();
         getUsers();
     
     }, []);
-
-    useEffect(() => {
-      projects.map((project) => {
-        project.UserStories.map((story) => {
-          setStories(stories => [...stories, story])
-        })
-      })
-    },[projects]);
-    
-
-    let numStories = stories.length;
 
     var numDone = 0;
     var numNew = 0;
     var numProgress = 0;
 
-    var statusArray = [];
-
-    /*for(let i=0;i<3; i++){
-        statusArray[i] = stories.at(i).UserStatus;
-    }*/
+    ///counting how many user stories are done,in progress or new
     
+    const storyArray =props.project.UserStories
+    let numStories = storyArray.length
+    storyArray.forEach((story)=>{
+      for(let key in story){
+        //Counting the the number of userstatus that are done etc
+        if(`${key}`== "UserStatus"){
 
-    //counting how many user stories are done,in progress or new
-    stories.forEach((stories) => {
-        for(const key in stories){
-          if(stories[key] == "New"){
+          if(story[key] == "New"){
             numNew++
           }
-          if(stories[key] == "Done"){
+          if(story[key] == "Done"){
             numDone++;
           }
-          if(stories[key] == "In Progress"){
+          if(story[key] == "In Progress"){
             numProgress++;
           }
-          
         }
-    });
+
+      }
+
+    })
 
 
-
-    
-
-
-    const data = [
+    let data = [
         {name: 'User Stories That Is/Are DONE', users: numDone},
         {name: 'User Stories In PROGRESS', users: numProgress},
         {name: 'User Stories That Is/Are NEW', users: numNew},
@@ -114,6 +87,8 @@ export default function Insights(){
         );
       };
       let projName = pName.toUpperCase();
+
+      
       
 
     
