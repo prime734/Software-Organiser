@@ -79,9 +79,6 @@ function Scrum() {
       <Header />
       <div className="tittle">
         <Typography variant="h5">Create Project</Typography>
-        <Typography variant="body1">
-          Choose template for your project
-        </Typography>
       </div>
 
       <div className="project-details">
