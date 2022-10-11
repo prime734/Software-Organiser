@@ -12,6 +12,8 @@ import UserStories from "../../Components/UserStories/UserStories";
 import Wiki from "../../Components/Wiki/Wiki";
 import Kanban from "../../Components/Kanban/Kanban";
 import Member from "../../Components/Member/Member";
+import Insights from "../../Components/Insights/Insights";
+import ProjectSettings from "../../Components/ProjectSettings/ProjectSettings";
 
 function ProjectHub() {
   const { state } = useLocation();
@@ -40,53 +42,6 @@ function ProjectHub() {
 
     getProject();
   }, []);
-
-  const goBack = () => {
-    navigate(-1);
-  };
-
-  function editWiki(ProjectWiki) {
-    //router function to view detials on single project
-    // let path = "/Wiki";
-    // navigate(path, {
-    //   state: {
-    //     ProjectWiki: ProjectWiki,
-    //     ID: ID,
-    //     ProjectName: ProjectName,
-    //     UserStories: UserStories
-    //   },
-    // });
-  }
-
-  const deleteProject = async () => {
-    //handles delete on single project
-    //await deleteDoc(doc(db, "Projects", ID));
-    goBack();
-  };
-
-  const tryDelete = () => {
-    //confrms intention to delete a single project
-    let isExecuted = window.confirm(
-      //pop up to confirm deletion
-      "Are you sure you want to delete this project?"
-    );
-    if (isExecuted) {
-      deleteProject();
-    }
-  };
-
-  const goAdd = () => {
-    //navigates to adding stories
-    let path = "/add";
-    // navigate(path, {
-    //   state: {
-    //     ID: ID,
-    //     UserStories: UserStories,
-    //     ProjectWiki: ProjectWiki,
-    //     ProjectName: ProjectName
-    //   },
-    // });
-  };
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -133,7 +88,7 @@ function ProjectHub() {
           >
             <span class="material-symbols-outlined">insights</span>
             <br />
-            Insights
+             Insights
           </button>
           <button
             className={toggleState === 6 ? "tabs active-tabs" : "tabs"}
@@ -154,11 +109,7 @@ function ProjectHub() {
         </div>
 
         <div className="content-tabs">
-          <div
-            className={
-              toggleState === 1 ? "content  active-content" : "content"
-            }
-          >
+          <div className={toggleState === 1 ? "content  active-content" : "content"}>
             {loading ? null : <UserStories project={project} />}
           </div>
 
@@ -166,36 +117,20 @@ function ProjectHub() {
             {loading ? null : <Kanban project = {project}/>}
           </div>
 
-          <div
-            className={
-              toggleState === 3 ? "content  active-content" : "content"
-            }
-          >
+          <div className={toggleState === 3 ? "content  active-content" : "content"}>
             {loading ? null : <Wiki project={project} />}
           </div>
 
-          <div
-            className={
-              toggleState === 4 ? "content  active-content" : "content"
-            }
-          >
-            <p>Insights</p>
+          <div className={toggleState === 4 ? "content  active-content" : "content"}>
+            {loading ? null : <Insights project={project}/>}
           </div>
 
-          <div
-            className={
-              toggleState === 6 ? "content  active-content" : "content"
-            }
-          >
+          <div className={toggleState === 6 ? "content  active-content" : "content"}>
             {loading ? null : <Member project={project} />}
           </div>
 
-          <div
-            className={
-              toggleState === 5 ? "content  active-content" : "content"
-            }
-          >
-            <p>Settings</p>
+          <div className={toggleState === 5 ? "content  active-content" : "content"}>
+            {loading ? null : <ProjectSettings project={project} />}
           </div>
         </div>
       </div>
