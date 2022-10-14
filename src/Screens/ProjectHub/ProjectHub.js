@@ -14,7 +14,7 @@ import Kanban from "../../Components/Kanban/Kanban";
 import Member from "../../Components/Member/Member";
 import Insights from "../../Components/Insights/Insights";
 import ProjectSettings from "../../Components/ProjectSettings/ProjectSettings";
-
+import ViewDocuments from "../../Components/ViewDocuments/ViewDocuments";
 function ProjectHub() {
   const { state } = useLocation();
   const { pName } = state; //state from previous page
@@ -106,6 +106,13 @@ function ProjectHub() {
             <br />
             Settings
           </button>
+          <button className={toggleState === 7 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(7)}>
+            <span class="material-symbols-outlined">
+              Folder
+            </span>
+            <br/>
+            files
+          </button>
         </div>
 
         <div className="content-tabs">
@@ -131,6 +138,9 @@ function ProjectHub() {
 
           <div className={toggleState === 5 ? "content  active-content" : "content"}>
             {loading ? null : <ProjectSettings project={project} />}
+          </div>
+          <div className={toggleState === 7 ? "content  active-content" : "content"}>
+            {loading ? null : <ViewDocuments project={project} />}
           </div>
         </div>
       </div>
