@@ -52,7 +52,6 @@ export default function Project() {
       // console.log(doc.id, " => ", doc.data());
       if (doc.data().ProjectMembers.includes(userEmail)) {
         setProject([...project, doc.data()]);
-        console.log(doc.data().ProjectMembers);
       }
     });
   };

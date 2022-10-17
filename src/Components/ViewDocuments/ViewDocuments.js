@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './ViewDocuments.css';
 import '../UserStories/UserStories.css';
 import '../AdderDocument/AdderDocument.css'
+
 function ViewDocuments(props) {
     let navigate = useNavigate();
     const routeChange = (file) => {
@@ -23,7 +24,8 @@ function ViewDocuments(props) {
     }
     return (
         <div>
-        <div className = "storycont">
+            Documents
+        {/* <div className = "storycont">
             {props.project.Documents.map((file) => {   
             return (
                 <div  className="story-div">   
@@ -42,7 +44,7 @@ function ViewDocuments(props) {
             <span class="material-symbols-outlined" id="adderdocument-icon" onClick={()=>Change()}>
                 upload_file
             </span>
-        </div>
+        </div> */}
         </div>
     )
 }

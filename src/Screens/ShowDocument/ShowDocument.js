@@ -12,6 +12,7 @@ function ShowDocument() {
     const fileRef = ref(storage, "files/");
     const [Url, setUrl] = useState('');            // url for file which is about to be displayed
     const [isLoading, setIsLoading] = useState(true); 
+    
   useEffect(() => {
     //setIsLoading(false)
     listAll(fileRef).then((response) => {
@@ -35,13 +36,20 @@ function ShowDocument() {
 
     return (
         <div>
-          <div class="header"><Header /></div>
-          <div className='filename'>{file.filename}</div>
-          {isLoading && <div> <LoadingSpinner /> </div>}
-          {!isLoading && <div>
-            <object width="100%" height="700px" data={Url} type="application/pdf" >   </object> </div>} 
-     
-          <div class="footer"><Footer /></div> 
+          <div class="header">
+            <Header />
+          </div>
+          <div class = "body">
+            <div className='filename'>{file.filename}</div>
+            {isLoading && <div> <LoadingSpinner /> </div>}
+            {!isLoading &&
+            <div>
+              <object width="100%" height="700px" data={Url} type="application/pdf" >   </object>
+            </div>} 
+          </div>
+          <div class="footer">
+            <Footer />
+          </div> 
         </div>
     )
 }

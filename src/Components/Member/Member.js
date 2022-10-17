@@ -20,7 +20,7 @@ function Member(props) {
       </div>
 
         {props.project.ProjectMembers.map((member,index) => (
-          <div className="div-row">
+          <div className="div-row" key={index}>
             <div>
               <p>{index+1}</p>
             </div>

@@ -26,7 +26,7 @@ function ProjectHub() {
   const [loading, setLoading] = useState(true);
 
   ////////////////////////////////////////////////////////////////
-
+  
   useEffect(() => {
     const getProject = async () => {
       const q = query(projectRef, where("ProjectName", "==", pName));
@@ -91,30 +91,23 @@ function ProjectHub() {
              Insights
           </button>
           <button
-            className={toggleState === 6 ? "tabs active-tabs" : "tabs"}
-            onClick={() => toggleTab(6)}
+            className={toggleState === 5 ? "tabs active-tabs" : "tabs"}
+            onClick={() => toggleTab(5)}
           >
             <span class="material-symbols-outlined">groups</span>
             <br />
             Members
           </button>
           <button
-            className={toggleState === 5 ? "tabs active-tabs" : "tabs"}
-            onClick={() => toggleTab(5)}
+            className={toggleState === 6 ? "tabs active-tabs" : "tabs"}
+            onClick={() => toggleTab(6)}
           >
             <span class="material-symbols-outlined">settings</span>
             <br />
             Settings
           </button>
-          <button className={toggleState === 7 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(7)}>
-            <span class="material-symbols-outlined">
-              Folder
-            </span>
-            <br/>
-            files
-          </button>
+          
         </div>
-
         <div className="content-tabs">
           <div className={toggleState === 1 ? "content  active-content" : "content"}>
             {loading ? null : <UserStories project={project} />}
@@ -132,16 +125,14 @@ function ProjectHub() {
             {loading ? null : <Insights project={project}/>}
           </div>
 
-          <div className={toggleState === 6 ? "content  active-content" : "content"}>
+          <div className={toggleState === 5 ? "content  active-content" : "content"}>
             {loading ? null : <Member project={project} />}
           </div>
 
-          <div className={toggleState === 5 ? "content  active-content" : "content"}>
+          <div className={toggleState === 6 ? "content  active-content" : "content"}>
             {loading ? null : <ProjectSettings project={project} />}
           </div>
-          <div className={toggleState === 7 ? "content  active-content" : "content"}>
-            {loading ? null : <ViewDocuments project={project} />}
-          </div>
+
         </div>
       </div>
       <div>
