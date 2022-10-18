@@ -19,3 +19,11 @@ test("tries to add a new document", () => {
 test("fail to add a new document", () => {
     expect(addDocument(documents, { description: "test 2", name: "", poster: "bob" })).toStrictEqual("No new document was added to the documents")
 })
+
+test("fail to add a new document", () => {
+    expect(addDocument(documents, { description: "", name: "bob", poster: "bob" })).toStrictEqual("No description provided")
+})
+
+test("fail to add a new document", () => {
+    expect(addDocument(documents, { description: "test 4", name: "bob", poster: "" })).toStrictEqual("No poster provided")
+})
