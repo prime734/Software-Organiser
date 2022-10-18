@@ -31,7 +31,9 @@
     border-bottom: 1px solid #8E0808;
 }
 
-
+.doc-name:hover {
+    border-bottom: 0px;
+}
 .projdesc {
     margin-top: -15px;
     border:  1px solid #8E0808;
