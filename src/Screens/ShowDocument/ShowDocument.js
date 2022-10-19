@@ -23,23 +23,16 @@ function ShowDocument() {
 
       });
         setIsLoading(false); 
-        //setTimeout(() => renderPDF, 3000);
     });
 
   }, []);
 
-  const renderPDF = (
-    <div >
-      <object width="100%" height="600px" data={Url} type="application/pdf" >   </object>
-    </div>
-  );
-
     return (
         <div>
-          <div class="header">
+          <div>
             <Header />
           </div>
-          <div class = "body">
+          <div >
             <div className='filename'>{file.filename}</div>
             {isLoading && <div> <LoadingSpinner /> </div>}
             {!isLoading &&
@@ -47,7 +40,7 @@ function ShowDocument() {
               <object width="100%" height="700px" data={Url} type="application/pdf" >   </object>
             </div>} 
           </div>
-          <div class="footer">
+          <div>
             <Footer />
           </div> 
         </div>
