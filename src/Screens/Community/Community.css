@@ -1,5 +1,22 @@
 .social-container{
-    max-width: 750px;
+    width: 750px;
+    padding: 10;
     margin: 0 auto;
     font-size: 4rem;
+}
+
+.facebook{
+    color: blue;
+}
+
+.instagram{
+    color: red;
+}
+
+.twitter{
+    color: #0362fc;
+}
+
+.linkedin{
+    color: #0352fc;
 }
