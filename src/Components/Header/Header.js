@@ -37,7 +37,7 @@ function Header() {
               &nbsp;Contact
             </Link>
 
-            <Link to="/community" class="link">
+            <Link to="/communityB" class="link">
               <FaConnectdevelop />
               &nbsp;Community
             </Link>

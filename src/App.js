@@ -19,6 +19,7 @@ import ForgotPass from "./Screens/ForgotPass/ForgotPass";
 import AddDocument from "./Screens/AddDocument/AddDocument";
 import ShowDocument from "./Screens/ShowDocument/ShowDocument";
 import Community from "./Screens/Community/Community";
+import CommunityB from "./Screens/CommunityB/CommunityB";
 
 function App() {
   const [userEmail, setUserEmail] = useState("");
@@ -44,6 +45,7 @@ function App() {
           <Route path="/adddocument" element={<AddDocument />} />
           <Route path="/showdocument" element={<ShowDocument />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/communityB" element={<CommunityB />} />
         </Routes>
       </BrowserRouter>
     </EmailContext.Provider>
