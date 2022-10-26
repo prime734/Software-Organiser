@@ -17,7 +17,9 @@ import Wiki from "./Screens/Wiki/Wiki";
 import AddMember from "./Screens/AddMember/AddMember";
 import ForgotPass from "./Screens/ForgotPass/ForgotPass";
 import AddDocument from "./Screens/AddDocument/AddDocument";
-import ShowDocument from "./Screens/ShowDocument/ShowDocument"
+import ShowDocument from "./Screens/ShowDocument/ShowDocument";
+import Community from "./Screens/Community/Community";
+
 function App() {
   const [userEmail, setUserEmail] = useState("");
 
@@ -41,6 +43,7 @@ function App() {
           <Route path="/forgotpass" element={<ForgotPass />} />
           <Route path="/adddocument" element={<AddDocument />} />
           <Route path="/showdocument" element={<ShowDocument />} />
+          <Route path="/community" element={<Community />} />
         </Routes>
       </BrowserRouter>
     </EmailContext.Provider>
