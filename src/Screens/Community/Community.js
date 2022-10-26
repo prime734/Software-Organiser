@@ -1,5 +1,7 @@
 import React from "react";
 import HeaderB from "../../Components/HeaderB/HeaderB";
+import Footer from "../../Components/Footer/Footer";
+
 import "./Community.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,6 +14,7 @@ import Lottie from "lottie-react";
 import social1 from "../../images/social1.json";
 import social2 from "../../images/Social2.json";
 import social3 from "../../images/Social3.json";
+import Tooltip from "@mui/material/Tooltip";
 
 function Community() {
   return (
@@ -74,23 +77,34 @@ function Community() {
 
             <div className="social-container">
               <a className="facebook" href="https://facebook.com">
-                <FontAwesomeIcon icon={faFacebook} />
+                <Tooltip title="Facebook">
+                  <FontAwesomeIcon icon={faFacebook} />
+                </Tooltip>
               </a>
               &nbsp;&nbsp;&nbsp;&nbsp;
               <a className="instagram" href="https://instagram.com">
-                <FontAwesomeIcon icon={faInstagram} />
+                <Tooltip title="Instagram">
+                  <FontAwesomeIcon icon={faInstagram} />
+                </Tooltip>
               </a>
               &nbsp;&nbsp;&nbsp;&nbsp;
               <a className="twitter" href="https://twitter.com">
-                <FontAwesomeIcon icon={faTwitter} />
+                <Tooltip title="Twitter">
+                  <FontAwesomeIcon icon={faTwitter} />
+                </Tooltip>
               </a>
               &nbsp;&nbsp;&nbsp;&nbsp;
               <a className="linkedin" href="https://linkedin.com">
-                <FontAwesomeIcon icon={faLinkedin} />
+                <Tooltip title="LinkedIn">
+                  <FontAwesomeIcon icon={faLinkedin} />
+                </Tooltip>
               </a>
             </div>
           </div>
         </div>
+      </div>
+      <div class="footer">
+        <Footer />
       </div>
     </div>
   );
