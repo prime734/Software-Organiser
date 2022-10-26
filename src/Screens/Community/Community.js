@@ -9,6 +9,10 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import { Container } from "react-bootstrap";
+import Lottie from "lottie-react";
+import social1 from "../../images/social1.json";
+import social2 from "../../images/Social2.json";
+import social3 from "../../images/Social3.json";
 
 function Community() {
   return (
@@ -17,7 +21,21 @@ function Community() {
       <div class="body">
         <div class="side-by-side">
           <div>
-            <p class="title">
+            <Lottie
+              animationData={social1}
+              loop={true}
+              style={{ height: 400 }}
+            />
+          </div>
+          <div>
+            <p class="community-title">
+              &nbsp;&nbsp;&nbsp;&nbsp;Join the Lion Community
+            </p>
+          </div>
+        </div>
+        <div class="side-by-side">
+          <div>
+            <p class="community-title">
               Be part of the conversation&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
             <p>
@@ -63,7 +81,6 @@ function Community() {
           </div>
         </div>
       </div>
-      <p class="title">PROJECT MANAGEMENT</p>
     </div>
   );
 }

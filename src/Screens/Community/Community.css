@@ -20,3 +20,12 @@
 .linkedin{
     color: #0352fc;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
+.community-title{
+    font-family: "Kalam";
+    font-size: 32px;
+    text-align:center; 
+    padding-top:100px;
+}
+
