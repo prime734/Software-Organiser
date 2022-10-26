@@ -17,7 +17,9 @@ import Wiki from "./Screens/Wiki/Wiki";
 import AddMember from "./Screens/AddMember/AddMember";
 import ForgotPass from "./Screens/ForgotPass/ForgotPass";
 import AddDocument from "./Screens/AddDocument/AddDocument";
-import ShowDocument from "./Screens/ShowDocument/ShowDocument"
+import ShowDocument from "./Screens/ShowDocument/ShowDocument";
+import Intro from "./Screens/Intro/Intro";
+
 function App() {
   const [userEmail, setUserEmail] = useState("");
 
@@ -25,7 +27,8 @@ function App() {
     <EmailContext.Provider value={{ userEmail, setUserEmail }}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SplashScreen />} />
+          <Route path="/" element={<Intro />} />
+          <Route path="/splash" element={<SplashScreen />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/myprojects" element={<MyProjects />} />
