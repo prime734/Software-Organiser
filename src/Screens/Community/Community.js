@@ -8,7 +8,6 @@ import {
   faTwitter,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
-import { Container } from "react-bootstrap";
 import Lottie from "lottie-react";
 import social1 from "../../images/social1.json";
 import social2 from "../../images/Social2.json";
@@ -29,7 +28,21 @@ function Community() {
           </div>
           <div>
             <p class="community-title">
-              &nbsp;&nbsp;&nbsp;&nbsp;Join the Lion Community
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Join the Lion
+              Community
+            </p>
+            <p>
+              &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Connect beyond
+              the screen. Meet up with creatives
+            </p>
+
+            <p>
+              &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;in your area
+              through events designed to help you
+            </p>
+            <p>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connect, share,
+              and learn together.
             </p>
           </div>
         </div>
@@ -59,25 +72,23 @@ function Community() {
           <div>
             <p>&nbsp;</p>
 
-            <Container>
-              <div className="social-container">
-                <a className="facebook" href="https://facebook.com">
-                  <FontAwesomeIcon icon={faFacebook} />
-                </a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a className="instagram" href="https://instagram.com">
-                  <FontAwesomeIcon icon={faInstagram} />
-                </a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a className="twitter" href="https://twitter.com">
-                  <FontAwesomeIcon icon={faTwitter} />
-                </a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a className="linkedin" href="https://linkedin.com">
-                  <FontAwesomeIcon icon={faLinkedin} />
-                </a>
-              </div>
-            </Container>
+            <div className="social-container">
+              <a className="facebook" href="https://facebook.com">
+                <FontAwesomeIcon icon={faFacebook} />
+              </a>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <a className="instagram" href="https://instagram.com">
+                <FontAwesomeIcon icon={faInstagram} />
+              </a>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <a className="twitter" href="https://twitter.com">
+                <FontAwesomeIcon icon={faTwitter} />
+              </a>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <a className="linkedin" href="https://linkedin.com">
+                <FontAwesomeIcon icon={faLinkedin} />
+              </a>
+            </div>
           </div>
         </div>
       </div>
