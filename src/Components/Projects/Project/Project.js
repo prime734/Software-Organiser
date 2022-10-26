@@ -124,7 +124,7 @@ export default function Project() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar variant="square">
+          <Avatar sx={{ backgroundColor: '#dcb7b2' }} variant="square">
             {project.length != 0 ? project[0].ProjectName[0] : "U"}
           </Avatar>
           {project.length != 0 ? project[0].ProjectName : "Unavailabe"}
@@ -135,16 +135,7 @@ export default function Project() {
             <Typography>Show all projects</Typography>
           </Link>
         </MenuItem>
-        <MenuItem>
-          <Button
-            sx={{ bgcolor: "#FF6666" }}
-            href="createprojects"
-            variant="contained"
-          >
-            <AddSharpIcon fontSize="small" />
-            Create new project
-          </Button>
-        </MenuItem>
+
       </Menu>
     </React.Fragment>
   );

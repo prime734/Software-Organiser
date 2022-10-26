@@ -22,6 +22,7 @@ import { db } from "../../firebase";
 export default function Profile() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
   const { userEmail, setUserEmail } = useContext(EmailContext);
 
   const open = Boolean(anchorEl);
@@ -51,6 +52,7 @@ export default function Profile() {
       // doc.data() is never undefined for query doc snapshots
       // console.log(doc.id, " => ", doc.data());
       setName(doc.data().Name);
+      setSurname(doc.data().Surname);
     });
   };
   useEffect(() => {
@@ -69,7 +71,7 @@ export default function Profile() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>{name[0]}</Avatar>
+            <Avatar sx={{ width: 42, height: 42, backgroundColor: '#e4b1a5' }}>{name[0]+ surname[0]}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -110,7 +112,7 @@ export default function Profile() {
       >
         <MenuItem onClick={() => navigate("/profilesettings")}>
           <Avatar /> 
-          <ListItemText primary={name} secondary={userEmail}/>
+          <ListItemText primary={name+" "+surname}  secondary={userEmail}/>
         </MenuItem>
         <Divider />
         <MenuItem onClick={logOut}>
