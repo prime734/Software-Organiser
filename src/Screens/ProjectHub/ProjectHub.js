@@ -33,8 +33,8 @@ function ProjectHub() {
 
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        setProject({ ...doc.data(), id: doc.id });
-        setLoading(false);
+        setProject({ ...doc.data(), id: doc.id });    //gets in focus project
+        setLoading(false);      //update loading to propergate state to tabs
 
         //console.log('Document data:', doc.data());
       });
@@ -44,7 +44,7 @@ function ProjectHub() {
   }, []);
 
   const toggleTab = (index) => {
-    setToggleState(index);
+    setToggleState(index);      //changes tab state focus
   };
 
   //////////////////////////////////////////////////////////////////////
