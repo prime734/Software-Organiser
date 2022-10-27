@@ -1,7 +1,5 @@
 import { React, useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-
-
 import './Wiki.css';
 import AdderDocument from '../AdderDocument/AdderDocument';
 import AdderWiki from '../AdderWiki/AdderWiki';
@@ -20,7 +18,8 @@ function Wiki(props) {
     let path = '/showdocument';
     navigate(path, {
       state: {
-        file: file
+        file: file,
+        project : props.project
       },
     });
   }
