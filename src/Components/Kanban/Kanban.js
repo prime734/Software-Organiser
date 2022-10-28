@@ -11,18 +11,18 @@ function Kanban(props){
 
     useEffect(() => {
         props.project.UserStories.map((story)=>{
-            setStories(stories => [...stories, story]);
+            setStories(stories => [...stories, story]);         //populates local array with user stories
         })
     },[])
 
-    const handleChange = async () => {
+    const handleChange = async () => {      //handles change of user stories
         const prref = doc(db, 'Projects', props.project.id);
         await updateDoc(prref, {
             UserStories: []
         })
 
         await updateDoc(prref, {
-            UserStories: [...stories]
+            UserStories: [...stories]       //updates project user stories to keep data persistent
         })
     };
 

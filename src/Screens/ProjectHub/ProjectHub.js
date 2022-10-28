@@ -14,7 +14,6 @@ import Kanban from "../../Components/Kanban/Kanban";
 import Member from "../../Components/Member/Member";
 import Insights from "../../Components/Insights/Insights";
 import ProjectSettings from "../../Components/ProjectSettings/ProjectSettings";
-import ViewDocuments from "../../Components/ViewDocuments/ViewDocuments";
 function ProjectHub() {
   const { state } = useLocation();
   const { pName } = state; //state from previous page
@@ -33,8 +32,8 @@ function ProjectHub() {
 
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        setProject({ ...doc.data(), id: doc.id });
-        setLoading(false);
+        setProject({ ...doc.data(), id: doc.id });    //gets in focus project
+        setLoading(false);      //update loading to propergate state to tabs
 
         //console.log('Document data:', doc.data());
       });
@@ -44,7 +43,7 @@ function ProjectHub() {
   }, []);
 
   const toggleTab = (index) => {
-    setToggleState(index);
+    setToggleState(index);      //changes tab state focus
   };
 
   //////////////////////////////////////////////////////////////////////

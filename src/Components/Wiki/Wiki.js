@@ -1,26 +1,25 @@
 import { React, useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-
-
 import './Wiki.css';
 import AdderDocument from '../AdderDocument/AdderDocument';
 import AdderWiki from '../AdderWiki/AdderWiki';
 
 function Wiki(props) {
-  const [documents, setDocuments] = useState([]);
+  const [documents, setDocuments] = useState([]);     //array to store documents
   let navigate = useNavigate();
 
   useEffect(() => {
     props.project.Documents.map((docu) => {
-      setDocuments(documents => [...documents, docu]);
+      setDocuments(documents => [...documents, docu]);    //populates local array of documents
     })
   }, [])
 
-  const showDocument = (file) => {
+  const showDocument = (file) => {    //function to be called when the file needs to be shown
     let path = '/showdocument';
     navigate(path, {
       state: {
-        file: file
+        file: file,
+        project : props.project
       },
     });
   }

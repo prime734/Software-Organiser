@@ -59,7 +59,7 @@ function Wiki() {
           placeholder="Wiki..."
         />
 
-        <button className="edtbtn" onClick={() => editWiki(wiki)}>
+        <button className="edtbtn"onClick={() =>  editWiki(wiki)}>
           Save
         </button>
       </div>
