@@ -1,4 +1,4 @@
-import React,{ useState, useEffect, useContext}  from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -18,9 +18,17 @@ import { getAuth, signOut } from "firebase/auth";
 import { EmailContext } from "../../context";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import { db } from "../../firebase";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
+import { storage } from "../../firebase";
 
 export default function Profile() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const { userEmail, setUserEmail } = useContext(EmailContext);
@@ -59,6 +67,19 @@ export default function Profile() {
     fun();
   }, []);
 
+  const [imageUrls, setImageUrls] = useState([]);
+  const imagesListRef = ref(storage, userEmail+"/");
+
+  useEffect(() => {
+    listAll(imagesListRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          setImageUrls((prev) => [...prev, url]);
+        });
+      });
+    });
+  }, []);
+
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -71,7 +92,9 @@ export default function Profile() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 42, height: 42, backgroundColor: '#e4b1a5' }}>{name[0]+ surname[0]}</Avatar>
+            <Avatar src={imageUrls[0]} sx={{ width: 42, height: 42, backgroundColor: "#e4b1a5" }}>
+              {name[0] + surname[0]}
+            </Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -111,8 +134,8 @@ export default function Profile() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={() => navigate("/profilesettings")}>
-          <Avatar /> 
-          <ListItemText primary={name+" "+surname}  secondary={userEmail}/>
+          <Avatar alt={name + " " + surname}src={imageUrls[0]} />
+          <ListItemText primary={name + " " + surname} secondary={userEmail} />
         </MenuItem>
         <Divider />
         <MenuItem onClick={logOut}>

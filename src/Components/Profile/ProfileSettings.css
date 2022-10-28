@@ -1,3 +1,6 @@
-.drawer {
-    background-color: green;
+.update-pp {
+  padding: 10%;
+  margin-top: -10%;
+  display: grid;
+  justify-items: center;
 }

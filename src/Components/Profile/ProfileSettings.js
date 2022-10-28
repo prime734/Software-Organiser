@@ -11,15 +11,27 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import Header from "../Header/Header";
 import { getAuth, sendPasswordResetEmail, updatePassword } from "firebase/auth";
 import { EmailContext } from "../../context";
+import { imageContext } from "../../context";
 import "./ProfileSettings.css";
 import { db } from "../../firebase";
 import { doc, getDoc, getDocs, collection, setDoc } from "firebase/firestore";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
+import { storage } from "../../firebase";
+import { v4 } from "uuid";
+import IconButton from "@mui/material/IconButton";
 
 const drawerWidth = 240;
 
@@ -76,9 +88,6 @@ function ProfileSettings(props) {
 
   const auth = getAuth();
 
-  const user = auth.currentUser;
-  const newPassword = "prime.1";
-
   const { userEmail, setUserEmail } = useContext(EmailContext);
   const [id, setID] = useState([]);
   const [name, setName] = useState("");
@@ -127,6 +136,30 @@ function ProfileSettings(props) {
 
   useEffect(() => {
     updateUS();
+  }, []);
+
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUrls, setImageUrls] = useState([]);
+
+  const imagesListRef = ref(storage, userEmail+"/");
+  const uploadFile = async () => {
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `${userEmail + "/" + imageUpload.name}`);
+    await uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImageUrls((prev) => [...prev, url]);
+      });
+    });
+  };
+
+  useEffect(() => {
+    listAll(imagesListRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          setImageUrls((prev) => [...prev, url]);
+        });
+      });
+    });
   }, []);
 
   return (
@@ -190,7 +223,7 @@ function ProfileSettings(props) {
             <div>
               <Typography>Name</Typography>
               <TextField
-              id="newname"
+                id="newname"
                 size="small"
                 placeholder="New name"
                 onChange={(event) => {
@@ -202,7 +235,7 @@ function ProfileSettings(props) {
             <div>
               <Typography>Surname</Typography>
               <TextField
-              id="newsurname"
+                id="newsurname"
                 size="small"
                 placeholder="New surname"
                 onChange={(event) => {
@@ -221,7 +254,6 @@ function ProfileSettings(props) {
             </Button>
           </Box>
         )}
-
         {showCP && (
           <Box
             component="main"
@@ -258,6 +290,35 @@ function ProfileSettings(props) {
             </Button>
           </Box>
         )}
+        <div className="update-pp">
+          <IconButton
+            component="label"
+            // sx={{ width: 150, height: 150 }}
+          >
+            <input
+              hidden
+              accept="image/*"
+              type="file"
+              onChange={(event) => {
+                setImageUpload(event.target.files[0]);
+              }}
+            />{" "}
+            <Avatar
+              sx={{ width: 150, height: 150 }}
+              alt={name + " " + surname}
+              src={imageUrls[0]}
+            />
+          </IconButton>
+          <Button
+            sx={{ width: 20, height: 30 }}
+            alt=""
+            variant="outlined"
+            onClick={uploadFile}
+          >
+            {" "}
+            update{" "}
+          </Button>
+        </div>{" "}
       </Box>
     </div>
   );
