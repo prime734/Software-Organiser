@@ -76,25 +76,37 @@ function Community() {
             <p>&nbsp;</p>
 
             <div className="social-container">
-              <a className="facebook" href="https://facebook.com">
+              <a
+                className="facebook"
+                href="https://facebook.com/profile.php?id=100087087979920"
+              >
                 <Tooltip title="Facebook">
                   <FontAwesomeIcon icon={faFacebook} />
                 </Tooltip>
               </a>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <a className="instagram" href="https://instagram.com">
+              <a
+                className="instagram"
+                href="https://instagram.com/lion_workspace?r=nametag"
+              >
                 <Tooltip title="Instagram">
                   <FontAwesomeIcon icon={faInstagram} />
                 </Tooltip>
               </a>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <a className="twitter" href="https://twitter.com">
+              <a
+                className="twitter"
+                href="https://twitter.com/LionWorkspace?t=eb7NU-i-HOA8eODI3O9ulw&s=09"
+              >
                 <Tooltip title="Twitter">
                   <FontAwesomeIcon icon={faTwitter} />
                 </Tooltip>
               </a>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <a className="linkedin" href="https://linkedin.com">
+              <a
+                className="linkedin"
+                href="https://linkedin.com/in/lion-workspace-9043b5255"
+              >
                 <Tooltip title="LinkedIn">
                   <FontAwesomeIcon icon={faLinkedin} />
                 </Tooltip>
