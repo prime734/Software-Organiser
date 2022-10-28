@@ -14,6 +14,8 @@ import Kanban from "../../Components/Kanban/Kanban";
 import Member from "../../Components/Member/Member";
 import Insights from "../../Components/Insights/Insights";
 import ProjectSettings from "../../Components/ProjectSettings/ProjectSettings";
+import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
+
 function ProjectHub() {
   const { state } = useLocation();
   const { pName } = state; //state from previous page
@@ -109,27 +111,27 @@ function ProjectHub() {
         </div>
         <div className="content-tabs">
           <div className={toggleState === 1 ? "content  active-content" : "content"}>
-            {loading ? null : <UserStories project={project} />}
+            {loading ? <LoadingSpinner/> : <UserStories project={project} />}
           </div>
 
           <div className={toggleState === 2 ? "content  active-content" : "content"}>
-            {loading ? null : <Kanban project = {project}/>}
+            {loading ? <LoadingSpinner /> : <Kanban project = {project}/>}
           </div>
 
           <div className={toggleState === 3 ? "content  active-content" : "content"}>
-            {loading ? null : <Wiki project={project} />}
+            {loading ? <LoadingSpinner/> : <Wiki project={project} />}
           </div>
 
           <div className={toggleState === 4 ? "content  active-content" : "content"}>
-            {loading ? null : <Insights project={project}/>}
+            {loading ? <LoadingSpinner/> : <Insights project={project}/>}
           </div>
 
           <div className={toggleState === 5 ? "content  active-content" : "content"}>
-            {loading ? null : <Member project={project} />}
+            {loading ? <LoadingSpinner/> : <Member project={project} />}
           </div>
 
           <div className={toggleState === 6 ? "content  active-content" : "content"}>
-            {loading ? null : <ProjectSettings project={project} />}
+            {loading ? <LoadingSpinner/> : <ProjectSettings project={project} />}
           </div>
 
         </div>

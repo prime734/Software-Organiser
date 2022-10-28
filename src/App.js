@@ -21,6 +21,7 @@ import ShowDocument from "./Screens/ShowDocument/ShowDocument";
 import Community from "./Screens/Community/Community";
 import CommunityB from "./Screens/CommunityB/CommunityB";
 import Intro from "./Screens/Intro/Intro";
+import TeamHub from "./Screens/TeamHub/TeamHub";
 
 function App() {
   const [userEmail, setUserEmail] = useState("");
@@ -48,6 +49,8 @@ function App() {
           <Route path="/showdocument" element={<ShowDocument />} />
           <Route path="/community" element={<Community />} />
           <Route path="/communityB" element={<CommunityB />} />
+          <Route path="/teamhub" element={<TeamHub />} />
+
         </Routes>
       </BrowserRouter>
     </EmailContext.Provider>
