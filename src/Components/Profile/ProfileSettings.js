@@ -310,9 +310,9 @@ function ProfileSettings(props) {
             />
           </IconButton>
           <Button
-            sx={{ width: 20, height: 30 }}
+            sx={{ width: 20, height: 30, borderRadius: 4, bgcolor: "#FF6666"}}
             alt=""
-            variant="outlined"
+            variant="contained"
             onClick={uploadFile}
           >
             {" "}
