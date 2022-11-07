@@ -8,6 +8,7 @@ import "./Landing.css";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import NewProject from "../../images/new_project.svg";
+import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner"
 
 function Landing() {
   const [projects, setProjects] = useState([]); //array to store user's projects'
@@ -16,6 +17,7 @@ function Landing() {
   const teamRef = collection(db, "Teams"); //collection reference to all teams
   let navigate = useNavigate();
   const { userEmail, setUserEmail } = useContext(EmailContext); //email address of user logged in
+  const [loading, setLoading] = useState(true);
 
   /*---------------------------------------------------------------- */
 
@@ -31,6 +33,16 @@ function Landing() {
     navigate(path, {
       state: {
         pName: project.ProjectName
+      },
+    });
+  }
+
+  function teamHub(team) {
+    //router function to view detials on single team
+    let path = "/teamhub";
+    navigate(path, {
+      state: {
+        tName: team.TeamName
       },
     });
   }
@@ -55,6 +67,7 @@ function Landing() {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setTeams(teams => [...teams, { ...doc.data(), id: doc.id }]);
+        setLoading(false);
       });
     };
 
@@ -71,6 +84,7 @@ function Landing() {
       <div class="header">
         <Header />
       </div>
+      {loading ? <LoadingSpinner /> :
       <div class="body">
         <h1>My Dashboard</h1>
         <h4>My projects</h4>
@@ -94,20 +108,20 @@ function Landing() {
         </div>
         <h4>My teams</h4>
         <div className="div-cont">
-          <div className="team-div">
-            <h6>
-              <span class="material-symbols-outlined">add_circle</span>
-            </h6>
-          </div>
+          
           {teams.map((team) => {
               return (
-                <div key={team.id} className="team-div">
+                <div 
+                  key={team.id} 
+                  className="team-div"
+                  onClick={() => teamHub(team)}
+                >
                   <h6>{team.TeamName}</h6>
                 </div>
               );
             })}
         </div>
-      </div>
+      </div>}
       <br />
       <div class="footer">
         <Footer />

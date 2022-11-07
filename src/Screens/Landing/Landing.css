@@ -16,6 +16,8 @@
     cursor: pointer;
     margin: 10px;
     min-width: 10vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .project-div:hover {
@@ -33,6 +35,8 @@
     cursor: pointer;
     margin: 10px;
     min-width: 10vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .team-div:hover {

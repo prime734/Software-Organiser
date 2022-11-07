@@ -23,7 +23,6 @@ function Header() {
         <div className="left-header">
           <img src={Lion} width="40" onClick={routeChange} />
           <p class="software">&nbsp;Lion</p>
-          <Project />
         </div>
         <div className="right-header">
           <div className="links-header">
