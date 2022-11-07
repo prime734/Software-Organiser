@@ -18,19 +18,11 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import Header from "../Header/Header";
 import { getAuth, sendPasswordResetEmail, updatePassword } from "firebase/auth";
 import { EmailContext } from "../../context";
-import { imageContext } from "../../context";
 import "./ProfileSettings.css";
 import { db } from "../../firebase";
-import { doc, getDoc, getDocs, collection, setDoc } from "firebase/firestore";
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  listAll,
-  list,
-} from "firebase/storage";
+import { doc, getDocs, collection, setDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL, listAll, deleteObject } from "firebase/storage";
 import { storage } from "../../firebase";
-import { v4 } from "uuid";
 import IconButton from "@mui/material/IconButton";
 
 const drawerWidth = 240;
@@ -38,12 +30,20 @@ const drawerWidth = 240;
 function ProfileSettings(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [showUS, setShowUS] = useState(true);
+  const [showCP, setShowCP] = useState(false);
+  const auth = getAuth();
+  const { userEmail, setUserEmail } = useContext(EmailContext);
+  const [id, setID] = useState([]);
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [EMAIL, setEMAIL] = useState("");
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUrls, setImageUrls] = useState([]);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const [showUS, setShowUS] = useState(true);
-  const [showCP, setShowCP] = useState(false);
 
   const drawer = (
     <div>
@@ -86,13 +86,6 @@ function ProfileSettings(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  const auth = getAuth();
-
-  const { userEmail, setUserEmail } = useContext(EmailContext);
-  const [id, setID] = useState([]);
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [EMAIL, setEMAIL] = useState("");
 
   const resetPass = () => {
     const auth = getAuth();
@@ -109,8 +102,8 @@ function ProfileSettings(props) {
       });
   };
 
-  const dt = [];
   const updateUS = async () => {
+    const dt = [];
     const querySnapshot = await getDocs(collection(db, "Users"));
     querySnapshot.forEach((doc) => {
       if (doc.data().Email === userEmail) {
@@ -138,20 +131,28 @@ function ProfileSettings(props) {
     updateUS();
   }, []);
 
-  const [imageUpload, setImageUpload] = useState(null);
-  const [imageUrls, setImageUrls] = useState([]);
-
-  const imagesListRef = ref(storage, userEmail+"/");
+  const imagesListRef = ref(storage, userEmail + "/");
   const uploadFile = async () => {
+    // removeProfilePic();
     if (imageUpload == null) return;
-    const imageRef = ref(storage, `${userEmail + "/" + imageUpload.name}`);
+    const imageRef = ref(storage, `${userEmail + "/pp"}`);
     await uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setImageUrls((prev) => [...prev, url]);
       });
     });
   };
-
+  // Create a reference to the file to delete
+  const removeProfilePic = () => {
+    const ppRef = ref(storage, userEmail + '/pp');
+    // Delete the file
+    deleteObject(ppRef).then(() => {
+      // File deleted successfully
+    }).catch((error) => {
+      // Uh-oh, an error occurred!
+    })
+  }
+  
   useEffect(() => {
     listAll(imagesListRef).then((response) => {
       response.items.forEach((item) => {
@@ -293,7 +294,6 @@ function ProfileSettings(props) {
         <div className="update-pp">
           <IconButton
             component="label"
-            // sx={{ width: 150, height: 150 }}
           >
             <input
               hidden
@@ -309,7 +309,7 @@ function ProfileSettings(props) {
               src={imageUrls[0]}
             />
           </IconButton>
-          <Button
+          <div className="update-remove"><Button
             sx={{ width: 20, height: 30 }}
             alt=""
             variant="outlined"
@@ -318,6 +318,15 @@ function ProfileSettings(props) {
             {" "}
             update{" "}
           </Button>
+            <Button
+              sx={{ width: 20, height: 30 }}
+              alt=""
+              variant="outlined"
+              onClick={removeProfilePic}
+            >
+              {" "}
+              remove{" "}
+            </Button></div>
         </div>{" "}
       </Box>
     </div>
