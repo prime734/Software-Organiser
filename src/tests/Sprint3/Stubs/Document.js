@@ -1,7 +1,5 @@
 import { React, useContext, useState } from 'react';
-import { useNavigate, useLocation } from "react-router-dom";
 
-import { v4 } from "uuid";
 
 
 const addDocument = (documents, newDocument) => {
@@ -20,26 +18,9 @@ const addDocument = (documents, newDocument) => {
     }
 };
 
-function Document() {
-    const [fileDescription, setFileDescription] = useState('No description provided ');
-    const [filename, setfilename] = useState('');
-    const [file, setfile] = useState(null);
-
-
-    return (
-        <div>
-            <div class="body">
-                <h3>Add A Document</h3>
-                <div className="indiv">
-                    <textarea className='input-description' type="text" placeholder="Description of the document" onChange={(event) => { setFileDescription(event.target.value) }} />
-                    <div>
-                        <input type="file" name="file" onChange={(event) => setfile(event.target.value)} />
-                        <button className="add-doc-btn" onClick={handleUpload} >Add Document</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
+const deleteDocument = (documents) => {
+    documents.pop();
+    return documents
 }
 
-module.exports = [addDocument]
+module.exports = [addDocument, deleteDocument]

@@ -4,6 +4,8 @@ import "@testing-library/jest-dom/extend-expect";
 const tests = require("../Stubs/Document");
 
 const addDocument = tests[0];
+const deleteDocument = tests[1];
+
 
 const documents = [{ description: "test pdf document", name: "test.pdf", poster: "tiisetso"}]
 
@@ -26,4 +28,8 @@ test("fail to add a new document", () => {
 
 test("fail to add a new document", () => {
     expect(addDocument(documents, { description: "test 4", name: "bob", poster: "" })).toStrictEqual("No poster provided")
+})
+
+test("tries to delete a document", () => {
+    expect(deleteDocument(documents)).toStrictEqual([{ description: "test pdf document", name: "test.pdf", poster: "tiisetso" }])
 })

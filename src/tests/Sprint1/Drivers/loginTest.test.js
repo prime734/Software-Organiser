@@ -1,4 +1,4 @@
-const login = require("./loginTest");
+const login = require("../Stubs/loginTest");
 
 
 test("checks for valid login details", () => {

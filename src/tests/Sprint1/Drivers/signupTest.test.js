@@ -1,4 +1,4 @@
-const signup = require("./signupTest");
+const signup = require("../Stubs/signupTest");
 
 
 test("checks for valid signup details", () => {

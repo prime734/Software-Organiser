@@ -1,4 +1,4 @@
-const tests = require("./userTest");
+const tests = require("../Stubs/userTest");
 
 const deleter = tests[0];
 const adder = tests[1];
