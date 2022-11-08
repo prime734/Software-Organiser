@@ -1,25 +1,22 @@
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
-import HeaderB from '../../Components/HeaderB/HeaderB';
-import Footer from '../../Components/Footer/Footer';
+import { useNavigate } from 'react-router-dom';             //importing required artifacts from react-router-dom
+import { useState, useEffect, useContext } from 'react';            //importing required artifacts from react
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";            //importing required artifacts from firebase
+
+import HeaderB from '../../Components/HeaderB/HeaderB';         //importing header from components when not logged in
+import Footer from '../../Components/Footer/Footer';                //importing footer from components
 import '../Login/Login.css';
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { db } from '../../firebase';
-import { collection, getDocs, addDoc } from "firebase/firestore";
-import emailjs from 'emailjs-com';          // library used to send users emails
-import project_management from "../../images/project_management.png";
-import { EmailContext } from '../../context';
+
 
 
 function ForgotPass() {
-    let navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    let navigate = useNavigate();           //navigator used to navigate between pages
+    const [email, setEmail] = useState('');             //email state
     const [isLogged, setIsLogged] = useState(null);
 
 
     const auth = getAuth();
 
-    const triggerResetEmail = async () => {
+    const triggerResetEmail = async () => {         //handles reseting of password
         await sendPasswordResetEmail(auth, email)
         .then(() => {
                 // email sent
@@ -33,11 +30,11 @@ function ForgotPass() {
             });        
         console.log("Password reset email sent");
     }
-    const routeChange = () => {
+    const routeChange = () => {         ///router function to navigate to login page
         let path = '/login';
         navigate(path);
     }
-    const Setemail = event => {
+    const Setemail = event => {             //handles setting email state
         setEmail(event.target.value);
     }
 

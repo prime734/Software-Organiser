@@ -1,13 +1,13 @@
-import { React, useContext, useState } from 'react';
-import { useNavigate, useLocation } from "react-router-dom";
-import { EmailContext } from "../../context";
-import { db } from '../../firebase';
-import { Timestamp, updateDoc, doc, deleteDoc } from "firebase/firestore";
+import { React, useContext, useState } from 'react';      //importing required artifacts from react
+import { useNavigate, useLocation } from "react-router-dom";      //importing required artifacts from react-router-dom
+import { EmailContext } from "../../context";       //email context for user logged in
+import { db } from '../../firebase';      //importing database from our firebase config
+import { Timestamp, updateDoc, doc, deleteDoc } from "firebase/firestore";      //importing required artifacts from firestore
 
 
 import './Add.css';
-import Header from "../../Components/Header/Header";
-import Footer from "../../Components/Footer/Footer";
+import Header from "../../Components/Header/Header";      //importing header from components
+import Footer from "../../Components/Footer/Footer";      //importing footer from components
 
 
 
@@ -33,7 +33,7 @@ function Add() {
             UserStatus: status,
             UserStory: userStory
       }, ...project.UserStories]
-    })
+    })      //handles user story updates
     navigate(-1);
   };
 

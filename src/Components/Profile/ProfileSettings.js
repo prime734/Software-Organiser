@@ -1,45 +1,45 @@
-import React, { useState, useContext, useEffect } from "react";
-import PropTypes from "prop-types";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import Button from "@mui/material/Button";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
-import TextField from "@mui/material/TextField";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import Header from "../Header/Header";
-import { getAuth, sendPasswordResetEmail, updatePassword } from "firebase/auth";
-import { EmailContext } from "../../context";
+import React, { useState, useContext, useEffect } from "react";         //importing required artifacts from react
+import PropTypes from "prop-types";               //importing required artifacts from prop types
+import Box from "@mui/material/Box";                                            //importing required artifacts from mui materials
+import Divider from "@mui/material/Divider";                                    //
+import Drawer from "@mui/material/Drawer";                                      //
+import List from "@mui/material/List";                                          //
+import ListItem from "@mui/material/ListItem";                                  //
+import Button from "@mui/material/Button";                                      //
+import ListItemButton from "@mui/material/ListItemButton";                      //
+import ListItemIcon from "@mui/material/ListItemIcon";                          //
+import ListItemText from "@mui/material/ListItemText";                          //
+import Toolbar from "@mui/material/Toolbar";                                    //
+import Typography from "@mui/material/Typography";                              //
+import Avatar from "@mui/material/Avatar";                                      //
+import TextField from "@mui/material/TextField";                                //
+import LockOpenIcon from "@mui/icons-material/LockOpen";                        //
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";            //
+import Header from "../Header/Header";      //imports header
+import { getAuth, sendPasswordResetEmail, updatePassword } from "firebase/auth";        //importing required artifacts from firebase
+import { EmailContext } from "../../context";         //email context for user logged in
 import "./ProfileSettings.css";
-import { db } from "../../firebase";
-import { doc, getDocs, collection, setDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL, listAll, deleteObject } from "firebase/storage";
-import { storage } from "../../firebase";
-import IconButton from "@mui/material/IconButton";
+import { db } from "../../firebase";          //importing database from our firebase config
+import { doc, getDocs, collection, setDoc } from "firebase/firestore";          //importing required artifacts from firestore
+import { ref, uploadBytes, getDownloadURL, listAll, deleteObject } from "firebase/storage";         //
+import { storage } from "../../firebase";         //
+import IconButton from "@mui/material/IconButton";            ///
 
 const drawerWidth = 240;
 
 function ProfileSettings(props) {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);      //optimization for mobile broswer
   const [showUS, setShowUS] = useState(true);
   const [showCP, setShowCP] = useState(false);
-  const auth = getAuth();
+  const auth = getAuth();       
   const { userEmail, setUserEmail } = useContext(EmailContext);
-  const [id, setID] = useState([]);
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [EMAIL, setEMAIL] = useState("");
-  const [imageUpload, setImageUpload] = useState(null);
-  const [imageUrls, setImageUrls] = useState([]);
+  const [id, setID] = useState([]);           //stores id
+  const [name, setName] = useState("");         //stores name
+  const [surname, setSurname] = useState("");         //stores surname
+  const [EMAIL, setEMAIL] = useState("");       //stores email
+  const [imageUpload, setImageUpload] = useState(null);         //stores image upload
+  const [imageUrls, setImageUrls] = useState([]);         //
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

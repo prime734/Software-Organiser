@@ -1,7 +1,7 @@
-import { React, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import { db } from "../../firebase";
-import { doc, deleteDoc } from "firebase/firestore";
+import { React, useState } from 'react';                //importing required artifacts from react
+import { useNavigate } from "react-router-dom";         //importing required artifacts from react-router-dom 
+import { db } from "../../firebase";            //importing data from our firebase config
+import { doc, deleteDoc } from "firebase/firestore";        //importing required artifacts from firestore
 
 
 import './ProjectSettings.css'

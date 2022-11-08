@@ -1,29 +1,28 @@
-import { React, useState, useEffect, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { db } from "../../firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { EmailContext } from "../../context";
+import { React, useState, useEffect, useContext } from "react";         //importing required artifacts from react
+import { useNavigate, useLocation } from "react-router-dom";            //importing required artifacts from react-router-dom
+import { db } from "../../firebase";                            //importing firebase from app configuration
+import { collection, getDocs, query, where } from "firebase/firestore";             //importing required artifacts from firebase firestore
+import { EmailContext } from "../../context";               //importing global email context for user logged in
 
 
 import './TeamHub.css';
-import Header from "../../Components/Header/Header";
-import Footer from "../../Components/Footer/Footer";
-import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
+import Header from "../../Components/Header/Header";                //importing header from components
+import Footer from "../../Components/Footer/Footer";                //importing footer from components
+import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";            //importing loading spinner from components
 
 function TeamHub() {
-    const { state } = useLocation();
-    let navigate = useNavigate();
+    const { state } = useLocation();            //importing state from previous page
     const { tName } = state; //state from previous page
-    const { userEmail, setUserEmail } = useContext(EmailContext);
-    const teamRef = collection(db, "Teams");
-    const [team, setTeam] = useState({});
-    const [loading, setLoading] = useState(true);
+    const { userEmail, setUserEmail } = useContext(EmailContext);           //email address of user logged in
+    const teamRef = collection(db, "Teams");                //reference of teams in database
+    const [team, setTeam] = useState({});               //team in focus
+    const [loading, setLoading] = useState(true);           //loading variable
 
 
     ////////////////////////////////////////////////////////////////
     useEffect(() => {
-        const getTeam = async () => {
-            const q = query(teamRef, where("TeamName", "==", tName));
+        const getTeam = async () => {               //handles getting team in focus
+            const q = query(teamRef, where("TeamName", "==", tName));           
 
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
@@ -41,8 +40,8 @@ function TeamHub() {
             <div class="header">
                 <Header />
             </div>
-            <div class="body">
-                {loading ? <LoadingSpinner /> : 
+            <div class="body">  {/*tenerary to check if data has been loaded*/}
+                {loading ? <LoadingSpinner /> :  
                     <div className="teamdet-div">
                         <h1 className="teamdet-name">{team.TeamName}</h1>
 

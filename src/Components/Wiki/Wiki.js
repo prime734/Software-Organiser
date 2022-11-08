@@ -1,8 +1,8 @@
-import { React, useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { React, useState, useEffect } from 'react';     //importing required artifacts from react
+import { useNavigate } from "react-router-dom";         //importing required artifacts from react-router-dom
 import './Wiki.css';
-import AdderDocument from '../AdderDocument/AdderDocument';
-import AdderWiki from '../AdderWiki/AdderWiki';
+import AdderDocument from '../AdderDocument/AdderDocument';         //importing adder document button
+import AdderWiki from '../AdderWiki/AdderWiki';             //importing adder wiki button
 
 function Wiki(props) {
   const [documents, setDocuments] = useState([]);     //array to store documents

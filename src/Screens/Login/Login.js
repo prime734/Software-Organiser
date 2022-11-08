@@ -1,18 +1,19 @@
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
-import HeaderB from '../../Components/HeaderB/HeaderB';
-import Footer from '../../Components/Footer/Footer';
+import { useNavigate } from 'react-router-dom';             //importing required artifacts from react-router-dom
+import { useState, useEffect, useContext } from 'react';            //importing required artifacts from react
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";            //importing required artifacts from firebase
+import { EmailContext } from '../../context';           //importing global email context for user logged in
+
+import HeaderB from '../../Components/HeaderB/HeaderB';             //import header from components when not logged in
+import Footer from '../../Components/Footer/Footer';                //importing footer from components
 import './Login.css';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { EmailContext } from '../../context';
-import project_management from "../../images/project_management.png";
+
 function Login() {
-    let navigate = useNavigate();
-    const [isLogged, setIsLogged] = useState(null);
-    const auth = getAuth();
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
-    const { userEmail, setUserEmail } = useContext(EmailContext);
+    let navigate = useNavigate();               //navigator used to navigate between pages
+    const [isLogged, setIsLogged] = useState(null);             //state for if user is logged in
+    const auth = getAuth();                 
+    const [email,setEmail] = useState('');          //email state
+    const [password,setPassword] = useState('');            //password state
+    const { userEmail, setUserEmail } = useContext(EmailContext);           //global state to be set to user after successful login
 
     useEffect(() => {
         //changed path if user logged in succesfully
@@ -21,19 +22,18 @@ function Login() {
             setIsLogged(null);
         }
             else {
-            console.log("Path must be changed");
-            routeChange();
+            routeChange();          //login successful
         }
     }, [isLogged]);
 
-    const routeChange = () => {
+    const routeChange = () => {             //routes to the landing page 
         let path = '/landing';
-        navigate(path,{ state: { email: email}});
+        navigate(path,{ state: { email: email}});           //passes state of user logged in
     }
-    const Setemail = event => {
+    const Setemail = event => {         //handles setting email state
         setEmail(event.target.value);
     }
-    const Setpassword = event => {
+    const Setpassword = event => {              //handles setting password state
         setPassword(event.target.value);
     }
     
@@ -53,7 +53,7 @@ function Login() {
                 const errorMessage = error.message;
                 setIsLogged(false);
                 if (errorCode === 'auth/invalid-email') {
-                    alert('That email address is invalid!');
+                    alert('That email address is invalid!');                
                 }
                 else {
                     alert(errorMessage);

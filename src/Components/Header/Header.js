@@ -1,20 +1,20 @@
-import { Link, useNavigate } from "react-router-dom";
-import { FiFolder, FiHelpCircle, FiHome } from "react-icons/fi";
-import { FaConnectdevelop } from "react-icons/fa";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
-import { AiOutlineContacts } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";       //importing required artifacts from react-router-dom
+import { FiFolder, FiHelpCircle, FiHome } from "react-icons/fi";        //importiing react icons
+import { FaConnectdevelop } from "react-icons/fa";                       //
+import { IoNotificationsOutline } from "react-icons/io5";                //
+import { CgProfile } from "react-icons/cg";                              //
+import { AiOutlineContacts } from "react-icons/ai";                      //
 
 import "./Header.css";
 
-import Profile from "../Profile/Profile";
+import Profile from "../Profile/Profile";       //importing user profile
 import Project from "../Projects/Project/Project";
-import Lion from "../../images/LION.png";
+import Lion from "../../images/LION.png";      //importing app icon
 
 function Header() {
   let navigate = useNavigate();
 
-  const routeChange = () => {
+  const routeChange = () => {       //handles route change to previous page
     navigate(-1);
   };
   return (

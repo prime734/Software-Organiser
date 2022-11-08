@@ -1,13 +1,13 @@
-import { React, useState, useEffect } from 'react';
-import { ColumnDirective, ColumnsDirective, KanbanComponent } from '@syncfusion/ej2-react-kanban';
-import { db } from '../../firebase';
-import { updateDoc, doc } from "firebase/firestore";
+import { React, useState, useEffect } from 'react';         //importing required artifacts from react
+import { ColumnDirective, ColumnsDirective, KanbanComponent } from '@syncfusion/ej2-react-kanban';          //importing required artifacts from sync-fusion library
+import { db } from '../../firebase';            //importing database from our firebase config
+import { updateDoc, doc } from "firebase/firestore";            //importing required artifacts from firebase
 
 import './Kanban.css';
 import Adder from '../Adder/Adder';
 
 function Kanban(props){
-    const [stories, setStories] = useState([]);
+    const [stories, setStories] = useState([]);         //array to store user stories
 
     useEffect(() => {
         props.project.UserStories.map((story)=>{

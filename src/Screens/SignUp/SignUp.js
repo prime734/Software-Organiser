@@ -1,52 +1,54 @@
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
-import HeaderB from '../../Components/HeaderB/HeaderB';
-import Footer from '../../Components/Footer/Footer';
+import { useNavigate } from 'react-router-dom';             //importing required artifacts from react-router-dom
+import { useState, useEffect, useContext } from 'react';            //importing required artifacts from react
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";                //importing required artifacts from firebase
+import { db } from '../../firebase';            //importing database from our firebase config
+import { collection, getDocs, addDoc } from "firebase/firestore";               //importing required artifacts from firebase
+import emailjs from 'emailjs-com';          // library used to send users emails
+import project_management from "../../images/project_management.png";         
+import { EmailContext } from '../../context';           //global email context for user logged in
+
+import HeaderB from '../../Components/HeaderB/HeaderB';             //importing header from components when not logged in
+import Footer from '../../Components/Footer/Footer';                //importing footer from components
 import '../Login/Login.css';
 import './SignUp.css';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { db } from '../../firebase';
-import { collection, getDocs, addDoc } from "firebase/firestore";
-import emailjs from 'emailjs-com';          // library used to send users emails
-import project_management from "../../images/project_management.png";
-import { EmailContext } from '../../context';
+
 
 
 function SignUp() {
-    let navigate = useNavigate();
-    const [name,setName] = useState('');
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [surname, setSurname] = useState('');
-    const { userEmail, setUserEmail } = useContext(EmailContext);
+    let navigate = useNavigate();                   //navigator used to navigate between pages
+    const [name,setName] = useState('');            //state to store name
+    const [password, setPassword] = useState('');       //state to store password
+    const [email, setEmail] = useState('');             //state to store email address
+    const [surname, setSurname] = useState('');             //state to store surname
+    const { userEmail, setUserEmail } = useContext(EmailContext);           //global email context going to be set after successfull signup 
 
     const [isLogged, setIsLogged] = useState(null);
 
 
 
-    const routeChange = () => {
+    const routeChange = () => {             ///router function to navigate to landing page after successful sign up
         let path = '/landing';
-        navigate(path, { state: {email: email}});
+        navigate(path, { state: {email: email}});               //passes  the email state to next page
     }
-    const loginhere = () => {       ///router function to change navigate site
+    const loginhere = () => {       ///router function to navigate to login page of account exists
         let path = "/login";
         navigate(path);
       };
-    const Setname = event => {
+    const Setname = event => {              //handles setting name state
         setName(event.target.value);
     }
-    const Setemail = event => {
+    const Setemail = event => {             //handles setting email state
         setEmail(event.target.value);
     }
-    const Setpassword = event => {
-        setPassword(event.target.value);
+    const Setpassword = event => {              //handles setting password state
+        setPassword(event.target.value);    
     }
-    const SetSurname = event => {
+    const SetSurname = event => {               //handles setting surname state
         setSurname(event.target.value);
     }
 
     const auth = getAuth();
-    const OnSignup = () => {
+    const OnSignup = () => {            //handles entire sign up process
 
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {

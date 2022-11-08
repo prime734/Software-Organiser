@@ -1,27 +1,26 @@
-import * as React from "react";
-import { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
-import Divider from "@mui/material/Divider";
-import Header from "../../Header/Header";
-import { doc, getDoc, getDocs, collection } from "firebase/firestore";
-import { db } from "../../../firebase";
-import { EmailContext } from "../../../context";
+import * as React from "react";       //importing required artifacts from react
+import { useState, useEffect, useContext } from "react";      //
+import { useNavigate } from "react-router-dom";     //importing required artifacts from react-router-dom
+import List from "@mui/material/List";                              //importing required artifacts from mui materials
+import ListItem from "@mui/material/ListItem";                      //
+import ListItemButton from "@mui/material/ListItemButton";          //
+import ListItemText from "@mui/material/ListItemText";              //
+import ListItemAvatar from "@mui/material/ListItemAvatar";          //
+import Typography from "@mui/material/Typography";                  //
+import Card from "@mui/material/Card";                              //
+import Button from "@mui/material/Button";                          //
+import Avatar from "@mui/material/Avatar";                          //
+import Divider from "@mui/material/Divider";                        //
+import Header from "../../Header/Header";                //importing header
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";        //importing required artifacts from firestore
+import { db } from "../../../firebase";         //importing database from our firebase config
+import { EmailContext } from "../../../context";        //email context for user logged in
 
 import "./MyProjects.css";
 
 export default function CheckboxListSecondary() {
-  const [project, setProject] = useState([]);
-  const [checked, setChecked] = React.useState([1]);
+  const [project, setProject] = useState([]);       //state for user project
+  const [checked, setChecked] = React.useState([1]);        //state for user checked projects
   const { userEmail, setUserEmail } = useContext(EmailContext);
   const navigate = useNavigate();
 
@@ -41,7 +40,7 @@ export default function CheckboxListSecondary() {
     setChecked(newChecked);
   };
 
-  const getProjects = async () => {
+  const getProjects = async () => {         //handles fetching projects from database
     const querySnapshot = await getDocs(collection(db, "Projects"));
     const dt = [];
     querySnapshot.forEach((doc) => {
@@ -49,7 +48,7 @@ export default function CheckboxListSecondary() {
         dt.push(doc.data());
       }
     });
-    setProject(dt);
+    setProject(dt);       //sets project user a member in
   };
 
   useEffect(() => {

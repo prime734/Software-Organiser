@@ -1,48 +1,32 @@
-import { React, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Header from "../../../Header/Header";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
-import Divider from "@mui/material/Divider";
-import { doc, getDoc, setDoc, addDoc, collection, Timestamp } from "firebase/firestore";
-import { db } from "../../../../firebase";
-import "./Scrum.css";
+import { React, useContext, useState } from "react";        //importing required artifacts from react
+import { useNavigate } from "react-router-dom";           //importing required artifacts from react-router-dom
+import Typography from "@mui/material/Typography";            //importing required artifacts from mui materials
+import TextField from "@mui/material/TextField";              //
+import Header from "../../../Header/Header";                  //importing header
+import Button from "@mui/material/Button";                    //
+import Avatar from "@mui/material/Avatar";                    //
+import Divider from "@mui/material/Divider";                  //
+import { doc, getDoc, setDoc, addDoc, collection, Timestamp } from "firebase/firestore";          //importing required artifacts from firestore
+import { db } from "../../../../firebase";          //importing data from firebase config
+import "./Scrum.css";        
 import { EmailContext } from "../../../../context";
 
 function Scrum() {
   let navigate = useNavigate();
   const { userEmail, setUserEmail } = useContext(EmailContext);
 
-  const [projectName, setProjectName] = useState("");
-  const [projectDesc, setProjectDesc] = useState("");
-  const [projectCreator, setProjectCreator] = useState(userEmail);
-  const [teamName, setTeamName] = useState("");
-  // const updateProject = async () =>
-  //   await setDoc(
-  //     doc(db, "Projects", 'SBzZtsjwDoqmKTP0lSJv'),
-  //     {
-  //       ProjectName: projectName,
-  //       ProjectCreator: projectCreator,
-  //       ProjectDesc: projectDesc,
-  //     },
-  //     { merge: true }
-  //   );
+  const [projectName, setProjectName] = useState("");           //stores project name
+  const [projectDesc, setProjectDesc] = useState("");           //stores project description
+  const [projectCreator, setProjectCreator] = useState(userEmail);        //sets project creator to user logged in
+  const [teamName, setTeamName] = useState("");           //stores team name
 
   const routeChange = () => {
-    let path = "/landing";
+    let path = "/landing";        //handles routing to landing page
     navigate(path);
   };
 
-  const createNewProject = async () => {
-    let timestamp = Timestamp.fromDate(new Date());
+  const createNewProject = async () => {          //handles creating new project and updating database
+    let timestamp = Timestamp.fromDate(new Date());         //timestamp for user stories
     await setDoc(
       doc(collection(db, "Projects")),
       {
@@ -58,7 +42,7 @@ function Scrum() {
       },
       { merge: true }
     );
-    await setDoc(
+    await setDoc(       //handles creating team to correspond with new project
       doc(collection(db, "Teams")),
       {
         TeamOwner: projectCreator,

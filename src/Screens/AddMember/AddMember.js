@@ -1,5 +1,5 @@
-import { React, useState, useEffect, useContext } from "react";
-import { db } from "../../firebase";
+import { React, useState, useEffect, useContext } from "react";       //importing required artifacts from react
+import { db } from "../../firebase";        //importing database from our firebase config
 import {
   collection,
   getDocs,
@@ -7,23 +7,23 @@ import {
   updateDoc,
   doc,
   deleteDoc,
-} from "firebase/firestore";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+} from "firebase/firestore";      //importing required artifacts from firebase
+import { Link, useNavigate, useLocation } from "react-router-dom";      //importing required artifacts from react-router-dom
 
 import "./AddMember.css";
-import Header from "../../Components/Header/Header";
-import Footer from "../../Components/Footer/Footer";
+import Header from "../../Components/Header/Header";      //importing header
+import Footer from "../../Components/Footer/Footer";       //importing footer
 import { AiOutlineConsoleSql } from "react-icons/ai";
 import Lion from "../../images/Lion-white.png";
 
 function AddMember() {
-  const { state } = useLocation();
+  const { state } = useLocation();      //state from previous page
   let navigate = useNavigate();
-  const { project } = state;
+  const { project } = state;      //state of project loaded
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState('');     //state for name
   const Setname = (event) => {
-    setName(event.target.value);
+    setName(event.target.value);      //sets name to name entered in text box
   };
 
   const addMember = async () => {

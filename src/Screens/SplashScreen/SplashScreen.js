@@ -1,25 +1,25 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";     //importing required artifacts from react-router-dom
+import react from "react";        //importing required artifacts from react
 
 import "./SplashScreen.css";
-import HeaderB from "../../Components/HeaderB/HeaderB";
-import Footer from "../../Components/Footer/Footer";
-import kanban from "../../images/kanban.jpg";
-import productivity from "../../images/productivity.png";
-import project_management from "../../images/project_management.png";
-import user_story from "../../images/user_story.png";
-import hero from "../../images/hero.png";
-import working from "../../images/working.json";
-import gears from "../../images/gears.json";
-import taskman from "../../images/taskman.json";
+import HeaderB from "../../Components/HeaderB/HeaderB";           //importing headerB from components because not logged in 
+import Footer from "../../Components/Footer/Footer";              //importing footer from components
+import kanban from "../../images/kanban.jpg";                   //image for kanban graphic
+import productivity from "../../images/productivity.png";         //image for productivity graphic
+import project_management from "../../images/project_management.png";       //image for project management graphic
+import user_story from "../../images/user_story.png";         //image for user story graphic
+import hero from "../../images/hero.png";             //image for hero graphic 
+import working from "../../images/working.json";              //image for working graphic
+import gears from "../../images/gears.json";                  //image for gears graphic
+import taskman from "../../images/taskman.json";              //image for taskman graphic
 
-import react from "react";
-import Lottie from "lottie-react";
+import Lottie from "lottie-react";              //importing required gif artifacts from Lottie-react
 import Lion from "../../images/Lion.json";
 
 function SplashScreen() {
-  let navigate = useNavigate();
+  let navigate = useNavigate();         //navigator used to navigate between pages
 
-  const routeChange = () => {       ///router function to change navigate site
+  const routeChange = () => {       ///router function to navigate to signup page
     let path = "/signup";
     navigate(path);
   };

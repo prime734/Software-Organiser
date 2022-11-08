@@ -41,8 +41,7 @@ function AddDocument() {
     };
 
     const goBack = () => {
-        let path = '/landing';
-        navigate(path);
+        navigate(-1);
     };
 
     

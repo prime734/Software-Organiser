@@ -1,17 +1,17 @@
-import { React } from 'react';
-import { useNavigate } from "react-router-dom";
+import { React } from 'react';          //importing required artifacts from react
+import { useNavigate } from "react-router-dom";         //importing required artifacts from react-router-dom
 
 
-import './Adder.css';
+import './Adder.css';           //importing style sheet
 
 function Adder(props) {
-    let navigate = useNavigate();
+    let navigate = useNavigate();           
 
-    const routeChange = () => {
+    const routeChange = () => {         //handles routing to the adding page
         let path = '/add';
         navigate(path, {
         state: {
-            project : props.project
+            project : props.project         //passes the project state to the adding page
             },
         });
     }

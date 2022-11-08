@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react";      //importing required artifacts from react
 
 import './Member.css';
-import AdderMember from "../AdderMember/AdderMember";
+import AdderMember from "../AdderMember/AdderMember";     //importing add member button from components
 
 function Member(props) {
   return (

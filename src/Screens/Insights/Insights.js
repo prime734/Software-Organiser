@@ -1,9 +1,9 @@
-import { db, auth } from '../../firebase';
-import { useLocation } from "react-router-dom";
-import { React, useEffect, useState, useContext } from 'react';
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { EmailContext } from "../../context";
-import { PieChart, Pie, Tooltip, Cell} from 'recharts';
+import { db, auth } from '../../firebase';        //importing database from our firebase config
+import { useLocation } from "react-router-dom";         //importing required artifacts from react-router-dom
+import { React, useEffect, useState, useContext } from 'react';       //importing required artifacts from react
+import { collection, getDocs, query, where } from "firebase/firestore";       //importing required artifacts from firestore
+import { EmailContext } from "../../context";       //global email context for user logged in
+import { PieChart, Pie, Tooltip, Cell} from 'recharts';         //importing required artifacts from recharts
 import { async } from '@firebase/util';
 import UserStories from '../../Components/UserStories/UserStories';
 
@@ -23,7 +23,7 @@ export default function Insights(props){
         const getUsers = async () => {
           //fetching all users from the database
 
-          const i = query(userRef , where("Email", "==", userEmail));
+          const i = query(userRef , where("Email", "==", userEmail));         //get instances of logged in user in table
           const querySnapshot = await getDocs(i);
           querySnapshot.forEach((doc) => {
             setUsers(users => [ ...users,{ ...doc.data(), id: doc.id }]);
@@ -35,9 +35,9 @@ export default function Insights(props){
     
     }, []);
 
-    var numDone = 0;
-    var numNew = 0;
-    var numProgress = 0;
+    var numDone = 0;        //number of stories done
+    var numNew = 0;         //number of new stories
+    var numProgress = 0;        //number of stories in progress
 
     const membersArray = props.project.ProjectMembers;
     ///counting how many user stories are done,in progress or new
@@ -48,13 +48,13 @@ export default function Insights(props){
         //Counting the the number of userstatus that are done etc
         if(`${key}`== "UserStatus"){
 
-          if(story[key] == "New"){
-            numNew++
+          if(story[key] == "New"){        //adds to total if story is new
+            numNew++    
           }
-          if(story[key] == "Done"){
+          if(story[key] == "Done"){       //adds to total if story is done
             numDone++;
           }
-          if(story[key] == "In Progress"){
+          if(story[key] == "In Progress"){    //adds to total if story is in progress
             numProgress++;
           }
         }
@@ -66,18 +66,18 @@ export default function Insights(props){
         {name: 'User Stories That Is/Are DONE', users: numDone},
         {name: 'User Stories In PROGRESS', users: numProgress},
         {name: 'User Stories That Is/Are NEW', users: numNew},
-      ];
-      const COLORS = ['#b3ebad', '#e4b1a5', '#dcb7b2'];
+      ];          //data to be rendered in pie chart
+      const COLORS = ['#b3ebad', '#e4b1a5', '#dcb7b2'];     //colors for pie chart
       const RADIAN = Math.PI / 180;
       //Calculating the number of user stories to be on percentage
-      const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+      const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {     //rendering chart with custom dimensions to fit data
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
         const y = cy + radius * Math.sin(-midAngle * RADIAN);
       
         return (
           <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-            {`${(percent * 100).toFixed(0)}%`}
+            {`${(percent * 100).toFixed(0)}%`}       
           </text>
         );
       };

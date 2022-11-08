@@ -1,17 +1,17 @@
-import { db, auth } from '../../firebase';
-import { useLocation } from "react-router-dom";
-import { React, useEffect, useState, useContext } from 'react';
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { EmailContext } from "../../context";
-import { PieChart, Pie, Tooltip, Cell} from 'recharts';
+import { db, auth } from '../../firebase';        //importing database from our firebase config
+import { useLocation } from "react-router-dom";     //importing required artifacts from react-router-dom
+import { React, useEffect, useState, useContext } from 'react';     //importing required artifacts from react
+import { collection, getDocs, query, where } from "firebase/firestore";     //importing required artifacts from firestore
+import { EmailContext } from "../../context";         //user email context
+import { PieChart, Pie, Tooltip, Cell} from 'recharts';       //importing required artifacts from recharts library
 import { async } from '@firebase/util';
 import UserStories from '../../Components/UserStories/UserStories';
 
 export default function Insights(props){
 
-    const [users, setUsers] = useState([]); //array to store user'
-    const userRef = collection(db, "Users"); //collection reference to all users
-    const { userEmail, setUserEmail } = useContext(EmailContext); //email address of user logged in
+    const [users, setUsers] = useState([]);     //array to store users
+    const userRef = collection(db, "Users");      //collection reference to all users
+    const { userEmail, setUserEmail } = useContext(EmailContext);       //email address of user logged in
     const { state } = useLocation();
     const {
         pName,
@@ -23,7 +23,7 @@ export default function Insights(props){
         const getUsers = async () => {
           //fetching all users from the database
 
-          const i = query(userRef , where("Email", "==", userEmail));
+          const i = query(userRef , where("Email", "==", userEmail));     //getting specified user from project
           const querySnapshot = await getDocs(i);
           querySnapshot.forEach((doc) => {
             setUsers(users => [ ...users,{ ...doc.data(), id: doc.id }]);
@@ -49,13 +49,13 @@ export default function Insights(props){
         if(`${key}`== "UserStatus"){
 
           if(story[key] == "New"){
-            numNew++
+            numNew++      //increases number of stories that are new
           }
           if(story[key] == "Done"){
-            numDone++;
+            numDone++;      //increases number of stories that are done
           }
           if(story[key] == "In Progress"){
-            numProgress++;
+            numProgress++;      //increases number of stories that are in progress
           }
         }
 
@@ -66,7 +66,7 @@ export default function Insights(props){
         {name: 'User Stories That Is/Are DONE', users: numDone},
         {name: 'User Stories In PROGRESS', users: numProgress},
         {name: 'User Stories That Is/Are NEW', users: numNew},
-      ];
+      ];        //stores data in array to be rendered in dynamic pie chart
       const COLORS = ['#b3ebad', '#e4b1a5', '#dcb7b2'];
       const RADIAN = Math.PI / 180;
       //Calculating the number of user stories to be on percentages

@@ -1,14 +1,15 @@
-import React, { useRef } from "react";
-import emailjs from "@emailjs/browser";
-import Header from "../../Components/Header/Header";
+import React, { useRef } from "react";        //importing required artifacts from react
+import emailjs from "@emailjs/browser";         //importing required artifacts from emailjs
+
+import Header from "../../Components/Header/Header";      //importing header from components
 import './ContactB.css'
-import Footer from "../../Components/Footer/Footer";
+import Footer from "../../Components/Footer/Footer";        //importing footer from components
 
 
 export default function ContactB() {
-  const form = useRef();
+  const form = useRef();        //form containing email  
 
-  const sendEmail = (e) => {
+  const sendEmail = (e) => {      //handles sending email to lion site
     e.preventDefault();
 
     emailjs
@@ -17,14 +18,14 @@ export default function ContactB() {
         "template_62hvg2x",
         form.current,
         "V_itaO6_FgMhs0fH8"
-      )
+      )           //sends email to Lion site
       .then(
         (result) => {
           console.log(result.text);
           e.target.reset();
-          alert("Message Sent Successfully, We'll Get Back To You Soon");
+          alert("Message Sent Successfully, We'll Get Back To You Soon");       //informs user email is sent
         },
-        (error) => {
+        (error) => {        //error catching
           console.log(error.text);
         }
       );

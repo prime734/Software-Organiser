@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
-import { FiHelpCircle, FiHome } from "react-icons/fi";
-import { FaConnectdevelop } from "react-icons/fa";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { AiOutlineContacts } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";         //importing required artifacts from react-router-dom
+import { FiHelpCircle, FiHome } from "react-icons/fi";        //importiing react icons
+import { FaConnectdevelop } from "react-icons/fa";            //
+import { IoNotificationsOutline } from "react-icons/io5";     //
+import { AiOutlineContacts } from "react-icons/ai";           //
 
 import "./HeaderB.css";
 import Lion from "../../images/LION.png";
@@ -10,7 +10,7 @@ import Lion from "../../images/LION.png";
 function HeaderB() {
   let navigate = useNavigate();
 
-  const routeChange = () => {
+  const routeChange = () => {     //handles site refresh
     let path = "/";
     navigate(path);
   };

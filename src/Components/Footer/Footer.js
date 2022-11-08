@@ -1,4 +1,4 @@
-import "./Footer.css";
+import "./Footer.css";      //importing style sheet
 import Typography from "@mui/material/Typography";
 
 function Footer() {

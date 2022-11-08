@@ -1,22 +1,22 @@
-import React, { useState, useEffect, useContext } from "react";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
-import Button from "@mui/material/Button";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
-import Folder from "@mui/icons-material/Folder";
-import AddSharpIcon from "@mui/icons-material/AddSharp";
-import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
-import { db } from "../../../firebase";
+import React, { useState, useEffect, useContext } from "react";       //importing required artifacts from reac
+import Box from "@mui/material/Box";                               //importing required artifacts from mui materials
+import Avatar from "@mui/material/Avatar";                         //
+import Menu from "@mui/material/Menu";                             //
+import MenuItem from "@mui/material/MenuItem";                     //
+import ListItemIcon from "@mui/material/ListItemIcon";             //
+import Divider from "@mui/material/Divider";                       //
+import IconButton from "@mui/material/IconButton";                 //
+import Card from "@mui/material/Card";                             //
+import Typography from "@mui/material/Typography";                 //
+import Tooltip from "@mui/material/Tooltip";                       //
+import Button from "@mui/material/Button";                         //
+import PersonAdd from "@mui/icons-material/PersonAdd";             //
+import Settings from "@mui/icons-material/Settings";               //
+import Folder from "@mui/icons-material/Folder";                   //
+import AddSharpIcon from "@mui/icons-material/AddSharp";           //
+import Paper from "@mui/material/Paper";                           //
+import { Link } from "react-router-dom";                           //importing required artifacts from react-router-dom
+import { db } from "../../../firebase";             //importing database from our firebase config
 import {
   doc,
   getDoc,
@@ -24,13 +24,13 @@ import {
   collection,
   query,
   where,
-} from "firebase/firestore";
+} from "firebase/firestore";        //importing required artifacts from firebase
 import { EmailContext } from "../../../context";
 import "./Project.css";
 
 export default function Project() {
-  const [project, setProject] = useState([]);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [project, setProject] = useState([]);       //state to store projects
+  const [anchorEl, setAnchorEl] = React.useState(null);   
   const { userEmail, setUserEmail } = useContext(EmailContext);
 
   window.addEventListener("load", () => {
@@ -51,7 +51,7 @@ export default function Project() {
       // doc.data() is never undefined for query doc snapshots
       // console.log(doc.id, " => ", doc.data());
       if (doc.data().ProjectMembers.includes(userEmail)) {
-        setProject([...project, doc.data()]);
+        setProject([...project, doc.data()]);       //sets projects user member in
       }
     });
   };

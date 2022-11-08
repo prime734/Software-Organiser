@@ -1,27 +1,26 @@
-import { React, useState, useEffect, useContext } from "react";
-import { db } from "../../firebase";
+import { React, useState, useEffect, useContext } from "react";       //importing required artifacts from react
+import { db } from "../../firebase";            //importing database from our firebase config
 import {
   collection,
   getDocs,
   setDoc,
   doc,
   deleteDoc,
-} from "firebase/firestore";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+} from "firebase/firestore";                      //importing required artifacts from firebase
+import { Link, useNavigate, useLocation } from "react-router-dom";        //importing required artifacts from react-router-dom
 
 import "./Wiki.css";
-import Header from "../../Components/Header/Header";
-import Footer from "../../Components/Footer/Footer";
-import { AiOutlineConsoleSql } from "react-icons/ai";
-import Lion from "../../images/Lion-white.png";
+import Header from "../../Components/Header/Header";          //importing header from components
+import Footer from "../../Components/Footer/Footer";          //importing footer from components
 
 function Wiki() {
-  const { state } = useLocation();
-  let navigate = useNavigate();
-  const { project } = state;
+  const { state } = useLocation();        //importing state from previous page
+  let navigate = useNavigate();           //navigator used to navigate between pages
+  const { project } = state;            //project im focus
 
-  const [wiki, setWiki] = useState(project.ProjectWiki);
-  const Setwiki = (event) => {
+  const [wiki, setWiki] = useState(project.ProjectWiki);        //wiki state
+
+  const Setwiki = (event) => {                  //function to change wiki state
     setWiki(event.target.value);
   };
 
@@ -41,7 +40,7 @@ function Wiki() {
     goBack();
   };
 
-  const goBack = () => {
+  const goBack = () => {        ///router function to navigate to previous page
     navigate(-1);
   };
 

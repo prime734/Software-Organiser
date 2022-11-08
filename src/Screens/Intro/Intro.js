@@ -1,10 +1,12 @@
-import { React, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Lottie from "lottie-react";
-import Lion from "../../images/Lion.json";
+import { React, useState } from "react";      //importing required artifacts from react
+import { useNavigate } from "react-router-dom";       //importing required artifacts from react-router-dom
+
+import Lottie from "lottie-react";          //importing required artifacts from lottie-react
+import Lion from "../../images/Lion.json";        //importing lion logo gif
 
 function Intro() {
-  let navigate = useNavigate();
+  let navigate = useNavigate();         //navigator used to navigate between pages
+  
   setTimeout(() => {
     let path = "/splash";
     navigate(path);
