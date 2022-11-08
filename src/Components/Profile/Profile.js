@@ -39,7 +39,7 @@ export default function Profile() {
 
   setTimeout(() => {
     setLoading(false);     
-  }, 1500);
+  }, 500);
 
 
   const open = Boolean(anchorEl);
@@ -102,11 +102,11 @@ export default function Profile() {
             aria-expanded={open ? "true" : undefined}
           >
             {loading ? 
-              <Avatar src={bland} sx={{ width: 42, height: 42, backgroundColor: "#F5EBD8" }}>
+              <Avatar src={bland} sx={{ width: 42, height: 42, backgroundColor: "#F5EBD8", color: "#8E0808" }}>
                 {name[0] + surname[0]}
               </Avatar>
             : 
-            <Avatar src={imageUrls[0]} sx={{ width: 42, height: 42, backgroundColor: "#F5EBD8" }}>
+              <Avatar src={imageUrls[0]} sx={{ width: 42, height: 42, backgroundColor: "#FFFBF4", color: "#8E0808"}}>
               {name[0] + surname[0]}
             </Avatar>}
           </IconButton>
