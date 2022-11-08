@@ -89,7 +89,7 @@ function Landing() {
         <h1>My Dashboard</h1>
         <h4>My projects</h4>
         <div className="div-cont">
-          <div className="project-div" onClick={routeChange}>
+          <div className="team-div" onClick={routeChange}>
             <h6>
               <span class="material-symbols-outlined">add_circle</span>
             </h6>
@@ -98,7 +98,7 @@ function Landing() {
             return (
               <div
                 key={project.id}
-                className="project-div"
+                className="team-div"
                 onClick={() => editHub(project)}
               >
                 <h6>{project.ProjectName}</h6>
@@ -106,7 +106,7 @@ function Landing() {
             );
           })}
         </div>
-        <h4>My teams</h4>
+        {/* <h4>My teams</h4>
         <div className="div-cont">
           
           {teams.map((team) => {
@@ -120,7 +120,7 @@ function Landing() {
                 </div>
               );
             })}
-        </div>
+        </div> */}
       </div>}
       <br />
       <div class="footer">
